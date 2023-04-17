@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Devpendent.Infrastructure;
 using Devpendent.Models;
+using Devpendent.Data;
 
-namespace Devpendent
+namespace Devpendent.Controllers
 {
     public class ProjectsController : Controller
     {
-        private readonly DataContext _context;
+        private readonly DevpendentContext _context;
 
-        public ProjectsController(DataContext context)
+        public ProjectsController(DevpendentContext context)
         {
             _context = context;
         }
@@ -155,14 +156,14 @@ namespace Devpendent
             {
                 _context.Projects.Remove(project);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProjectExists(int id)
         {
-          return _context.Projects.Any(e => e.Id == id);
+            return _context.Projects.Any(e => e.Id == id);
         }
     }
 }

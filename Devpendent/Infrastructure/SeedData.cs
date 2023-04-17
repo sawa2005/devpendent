@@ -1,12 +1,13 @@
 ﻿using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
 using Devpendent.Models;
+using Devpendent.Data;
 
 namespace Devpendent.Infrastructure
 {
     public class SeedData
     {
-        public static void SeedDatabase(DataContext context)
+        public static void SeedDatabase(DevpendentContext context)
         {
             context.Database.Migrate();
 

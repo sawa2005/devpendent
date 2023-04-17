@@ -5,7 +5,6 @@ using Devpendent.Data;
 using Devpendent.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DevpendentContextConnection") ?? throw new InvalidOperationException("Connection string 'DevpendentContextConnection' not found.");
 
 builder.Services.AddDistributedMemoryCache();
 
@@ -15,14 +14,9 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.AddDbContext<DataContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:DbConnection"]);
-});
-
 builder.Services.AddDbContext<DevpendentContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration[connectionString]);
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DbConnection"]);
 });
 
 builder.Services.AddDefaultIdentity<DevpendentUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<DevpendentContext>();
@@ -55,7 +49,7 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
+var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DevpendentContext>();
 SeedData.SeedDatabase(context);
 
 app.Run();
