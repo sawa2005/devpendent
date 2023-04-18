@@ -25,5 +25,6 @@ public class DevpendentUser : IdentityUser
     public string Image { get; set; }
     public ICollection<Job> Jobs { get; set; }
     public ICollection<Education> Educations { get; set; }
+    public ICollection<Project> Projects { get; set; }
 }
 

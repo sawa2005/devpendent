@@ -35,5 +35,11 @@ public class DevpendentContext : IdentityDbContext<DevpendentUser>
             .WithOne(e => e.User)
             .HasForeignKey(e => e.UserId)
             .IsRequired();
+
+        builder.Entity<DevpendentUser>()
+            .HasMany(e => e.Projects)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId)
+            .IsRequired();
     }
 }
