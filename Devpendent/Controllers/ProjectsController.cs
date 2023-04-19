@@ -14,10 +14,12 @@ namespace Devpendent.Controllers
     public class ProjectsController : Controller
     {
         private readonly DevpendentContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProjectsController(DevpendentContext context)
+        public ProjectsController(DevpendentContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<IActionResult> Index(string categorySlug = "", int p = 1)
@@ -73,7 +75,8 @@ namespace Devpendent.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
+
             return View();
         }
 

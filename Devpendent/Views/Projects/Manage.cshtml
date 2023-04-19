@@ -33,6 +33,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Category)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -55,10 +58,13 @@
                 @Html.DisplayFor(modelItem => item.DeliveryTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Image)
+                <img src="/media/@Html.DisplayFor(modelItem => item.Image)" class="img-fluid" alt="" />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.Id)
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

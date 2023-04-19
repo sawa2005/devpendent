@@ -1,4 +1,5 @@
 ﻿using Devpendent.Areas.Identity.Data;
+using Devpendent.Data.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
@@ -25,6 +26,11 @@ namespace Devpendent.Models
         public string DeliveryTime { get; set; }
 
         public string Image { get; set; }
+
+        [NotMapped]
+        [FileExtension]
+        public IFormFile ImageUpload { get; set; }
+
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public string UserId { get; set; }
