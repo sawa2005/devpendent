@@ -26,51 +26,62 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        public string Username { get; set; }
+        public string Email { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+        public DateTime RegisterDate { get; set; }
+
         [TempData]
         public string StatusMessage { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            [Required]
+            public string Username { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Required]
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+            public string Location { get; set; }
+
+            public string Description { get; set; }
         }
 
         private async Task LoadAsync(DevpendentUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var firstName = user.FirstName;
+            var lastName = user.LastName;
+            var email = user.Email;
+            var location = user.Location;
+            var description = user.Description;
+            var registerDate = user.RegisterDate;
 
-            Username = userName;
+            Email = email;
+            RegisterDate = registerDate;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                Username = userName,
+                PhoneNumber = phoneNumber,
+                FirstName = firstName,
+                LastName = lastName,
+                Location = location,
+                Description = description
             };
         }
 
@@ -107,6 +118,61 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
                 if (!setPhoneResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.Username != user.UserName)
+            {
+                user.UserName = Input.Username;
+                var setUserNameResult = await _userManager.UpdateAsync(user);
+                if (!setUserNameResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set username.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.FirstName != user.FirstName)
+            {
+                user.FirstName = Input.FirstName;
+                var setFirstNameResult = await _userManager.UpdateAsync(user);
+                if (!setFirstNameResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set first name.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.LastName != user.LastName)
+            {
+                user.LastName = Input.LastName;
+                var setLastNameResult = await _userManager.UpdateAsync(user);
+                if (!setLastNameResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set last name.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.Location != user.Location)
+            {
+                user.Location = Input.Location;
+                var setLocationResult = await _userManager.UpdateAsync(user);
+                if (!setLocationResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set location.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.Description != user.Description)
+            {
+                user.Description = Input.Description;
+                var setDescriptionResult = await _userManager.UpdateAsync(user);
+                if (!setDescriptionResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set description.";
                     return RedirectToPage();
                 }
             }

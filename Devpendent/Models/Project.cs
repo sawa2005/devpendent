@@ -28,6 +28,6 @@ namespace Devpendent.Models
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public string UserId { get; set; }
-        public DevpendentUser User { get; set; }
+        public DevpendentUser User { get; set; } = new DevpendentUser();
     }
 }
