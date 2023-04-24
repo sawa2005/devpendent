@@ -31,6 +31,7 @@ namespace Devpendent.Models
         [FileExtension]
         public IFormFile ImageUpload { get; set; }
 
+        [Required, Range(1, int.MaxValue, ErrorMessage = "Please choose a category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public string UserId { get; set; }

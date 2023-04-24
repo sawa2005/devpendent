@@ -49,7 +49,4 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DevpendentContext>();
-SeedData.SeedDatabase(context);
-
 app.Run();

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Devpendent.Infrastructure;
 using Devpendent.Models;
 using Devpendent.Data;
+using Microsoft.AspNetCore.Identity;
+using Devpendent.Areas.Identity.Data;
 
 namespace Devpendent.Controllers
 {
@@ -15,11 +17,13 @@ namespace Devpendent.Controllers
     {
         private readonly DevpendentContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<DevpendentUser> _userManager;
 
-        public ProjectsController(DevpendentContext context, IWebHostEnvironment webHostEnvironment)
+        public ProjectsController(DevpendentContext context, IWebHostEnvironment webHostEnvironment, UserManager<DevpendentUser> userManager)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(string categorySlug = "", int p = 1)
@@ -85,15 +89,46 @@ namespace Devpendent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Slug,Title,Description,Budget,DeliveryTime,Image,CategoryId")] Project project)
+        public async Task<IActionResult> Create([Bind("Id,Slug,Title,Description,Budget,DeliveryTime,Image,ImageUpload,CategoryId,UserId")] Project project)
         {
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", project.CategoryId);
+
             if (ModelState.IsValid)
             {
+                project.Slug = project.Title.ToLower().Replace(" ", "-");
+
+                var slug = await _context.Projects.FirstOrDefaultAsync(p => p.Slug == project.Slug);
+
+                if (slug != null)
+                {
+                    project.Slug += project.Id;
+                }
+
+                if (project.ImageUpload != null)
+                {
+                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/projects");
+                    string imageName = Guid.NewGuid().ToString() + "_" + project.ImageUpload.FileName;
+
+                    string filePath = Path.Combine(uploadsDir, imageName);
+
+                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                    await project.ImageUpload.CopyToAsync(fs);
+                    fs.Close();
+
+                    project.Image = imageName;
+                }
+
+                var userId = _userManager.GetUserId(User);
+                project.UserId = userId;
+
                 _context.Add(project);
                 await _context.SaveChangesAsync();
+
+                TempData["Success"] = "The project has been created!";
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", project.CategoryId);
+
             return View(project);
         }
 
@@ -110,7 +145,9 @@ namespace Devpendent.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", project.CategoryId);
+
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", project.CategoryId);
+
             return View(project);
         }
 
@@ -119,35 +156,65 @@ namespace Devpendent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Slug,Title,Description,Budget,DeliveryTime,Image,CategoryId")] Project project)
+        public async Task<IActionResult> Edit(int id, Project input)
         {
-            if (id != project.Id)
-            {
-                return NotFound();
-            }
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", input.CategoryId);
 
             if (ModelState.IsValid)
             {
-                try
+                var project = await _context.Projects.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (project == null) 
                 {
-                    _context.Update(project);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                input.Slug = input.Title.ToLower().Replace(" ", "-");
+
+                if (input.Slug != project.Slug)
                 {
-                    if (!ProjectExists(project.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    project.Slug = input.Slug;
                 }
+
+                project.Title = input.Title;
+                project.Budget = input.Budget;
+                project.Description = input.Description;
+                project.DeliveryTime = input.DeliveryTime;
+
+                if (input.ImageUpload != null)
+                {
+                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/projects");
+                    string imageName = Guid.NewGuid().ToString() + "_" + input.ImageUpload.FileName;
+                    string filePath = Path.Combine(uploadsDir, imageName);
+
+                    if (project.Image != null)
+                    {
+                        string oldImagePath = Path.Combine(uploadsDir, project.Image);
+
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                    await input.ImageUpload.CopyToAsync(fs);
+                    fs.Close();
+
+                    project.Image = imageName;
+                }
+
+                project.CategoryId = input.CategoryId;
+
+                _context.Projects.Update(project);
+                await _context.SaveChangesAsync();
+
+                TempData["Success"] = "The project has been edited!";
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", project.CategoryId);
-            return View(project);
+
+            return View(input);
         }
 
         // GET: Projects/Delete/5
@@ -178,13 +245,29 @@ namespace Devpendent.Controllers
             {
                 return Problem("Entity set 'DataContext.Projects'  is null.");
             }
+
             var project = await _context.Projects.FindAsync(id);
+
             if (project != null)
             {
+                if(!string.Equals(project.Image, "noimage.png"))
+                {
+                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/projects");
+                    string oldImagePath = Path.Combine(uploadsDir, project.Image);
+
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
                 _context.Projects.Remove(project);
             }
 
             await _context.SaveChangesAsync();
+
+            TempData["Success"] = "The project has been deleted!";
+
             return RedirectToAction(nameof(Index));
         }
 
