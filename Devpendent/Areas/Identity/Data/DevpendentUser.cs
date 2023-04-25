@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Devpendent.Data.Validation;
 using Devpendent.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -22,7 +23,9 @@ public class DevpendentUser : IdentityUser
     public DateTime RegisterDate { get; set; }
 
     public string Description { get; set; }
+
     public string Image { get; set; }
+
     public ICollection<Job> Jobs { get; set; }
     public ICollection<Education> Educations { get; set; }
     public ICollection<Project> Projects { get; set; }

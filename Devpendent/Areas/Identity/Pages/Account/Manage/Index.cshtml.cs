@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Devpendent.Areas.Identity.Data;
+using Devpendent.Data.Validation;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,26 +19,29 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<DevpendentUser> _userManager;
         private readonly SignInManager<DevpendentUser> _signInManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public IndexModel(
             UserManager<DevpendentUser> userManager,
-            SignInManager<DevpendentUser> signInManager)
+            SignInManager<DevpendentUser> signInManager,
+            IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public string Email { get; set; }
 
         public DateTime RegisterDate { get; set; }
 
+        public string Image { get; set; }
+
         [TempData]
         public string StatusMessage { get; set; }
 
-
         [BindProperty]
         public InputModel Input { get; set; }
-
 
         public class InputModel
         {
@@ -58,6 +63,9 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             public string Location { get; set; }
 
             public string Description { get; set; }
+
+            [FileExtension]
+            public IFormFile ImageUpload { get; set; }
         }
 
         private async Task LoadAsync(DevpendentUser user)
@@ -70,9 +78,11 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             var location = user.Location;
             var description = user.Description;
             var registerDate = user.RegisterDate;
+            var image = user.Image;
 
             Email = email;
             RegisterDate = registerDate;
+            Image = image;
 
             Input = new InputModel
             {
@@ -173,6 +183,35 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
                 if (!setDescriptionResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set description.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.ImageUpload != null)
+            {
+                string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/users");
+                string imageName = Guid.NewGuid().ToString() + "_" + Input.ImageUpload.FileName;
+                string filePath = Path.Combine(uploadsDir, imageName);
+
+                if (user.Image != null)
+                {
+                    string oldImagePath = Path.Combine(uploadsDir, user.Image);
+
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                FileStream fs = new FileStream(filePath, FileMode.Create);
+                await Input.ImageUpload.CopyToAsync(fs);
+                fs.Close();
+
+                user.Image = imageName;
+                var setImageResult = await _userManager.UpdateAsync(user);
+                if (!setImageResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set a profile picture.";
                     return RedirectToPage();
                 }
             }

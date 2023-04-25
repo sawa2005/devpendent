@@ -127,7 +127,7 @@ namespace Devpendent.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Devpendent.Models.Education", b =>
@@ -155,7 +155,7 @@ namespace Devpendent.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Educations");
+                    b.ToTable("Educations", (string)null);
                 });
 
             modelBuilder.Entity("Devpendent.Models.Job", b =>
@@ -186,7 +186,7 @@ namespace Devpendent.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Jobs");
+                    b.ToTable("Jobs", (string)null);
                 });
 
             modelBuilder.Entity("Devpendent.Models.Project", b =>
@@ -231,7 +231,7 @@ namespace Devpendent.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
