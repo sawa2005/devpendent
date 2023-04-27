@@ -1,5 +1,6 @@
 ﻿using Devpendent.Areas.Identity.Data;
 using Devpendent.Data.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
@@ -9,7 +10,10 @@ namespace Devpendent.Models
     public class Project
     {
         public int Id { get; set; }
+
         public string Slug { get; set; }
+
+        public DateTime CreationDate { get; set; }
         
         [Required(ErrorMessage = "Please enter a title")]
         public string Title { get; set; }
@@ -33,8 +37,11 @@ namespace Devpendent.Models
 
         [Required, Range(1, int.MaxValue, ErrorMessage = "Please choose a category")]
         public int CategoryId { get; set; }
+
         public Category Category { get; set; }
+
         public string UserId { get; set; }
+
         public DevpendentUser User { get; set; } = new DevpendentUser();
     }
 }
