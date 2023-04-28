@@ -6,6 +6,10 @@
 
 <h1>Projects</h1>
 
+<h2>Sort by</h2>
+<a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParam"]">Title</a>
+<a asp-action="Index" asp-route-sortOrder="@ViewData["BudgetSortParam"]">Budget</a>
+
 <div class="row">
     @foreach (var item in Model)
     {

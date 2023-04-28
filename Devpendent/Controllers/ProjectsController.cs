@@ -26,18 +26,35 @@ namespace Devpendent.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(string categorySlug = "", int p = 1)
+        public async Task<IActionResult> Index(string sortOrder, string categorySlug = "", int p = 1)
         {
-            int pageSize = 1;
+            int pageSize = 3;
             ViewBag.PageNumber = p;
             ViewBag.PageRange = pageSize;
             ViewBag.CategorySlug = categorySlug;
+
+            ViewData["TitleSortParam"] = String.IsNullOrEmpty(sortOrder) ? "title_sort" : "";
+            ViewData["BudgetSortParam"] = sortOrder == "Budget" ? "budget_sort" : "budget_sort";
 
             if (categorySlug == "")
             {
                 ViewBag.TotalPages = (int)Math.Ceiling((decimal)_context.Projects.Count() / pageSize);
 
-                return View(await _context.Projects.OrderByDescending(p => p.Id).Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
+                var projects = from x in _context.Projects select x;
+
+                switch (sortOrder)
+                {
+                    case "title_sort":
+                    default:
+                        projects = projects.OrderBy(p => p.Title);
+                        break;
+
+                    case "budget_sort":
+                        projects = projects.OrderBy(p => p.Budget);
+                        break;
+                }
+
+                return View(await projects.Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
             }
 
             Category category = await _context.Categories.Where(c => c.Slug == categorySlug).FirstOrDefaultAsync();
@@ -47,7 +64,19 @@ namespace Devpendent.Controllers
             var projectsByCategory = _context.Projects.Where(p => p.CategoryId == category.Id);
             ViewBag.TotalPages = (int)Math.Ceiling((decimal)projectsByCategory.Count() / pageSize);
 
-            return View(await projectsByCategory.OrderByDescending(p => p.Id).Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
+            switch (sortOrder)
+            {
+                case "title_sort":
+                default:
+                    projectsByCategory = projectsByCategory.OrderBy(p => p.Title);
+                    break;
+
+                case "budget_sort":
+                    projectsByCategory = projectsByCategory.OrderBy(p => p.Title);
+                    break;
+            }
+
+            return View(await projectsByCategory.Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
         }
 
         // GET: Projects
@@ -95,6 +124,8 @@ namespace Devpendent.Controllers
 
             if (ModelState.IsValid)
             {
+                project.CreationDate = DateTime.Now;
+
                 project.Slug = project.Title.ToLower().Replace(" ", "-");
 
                 var slug = await _context.Projects.FirstOrDefaultAsync(p => p.Slug == project.Slug);
