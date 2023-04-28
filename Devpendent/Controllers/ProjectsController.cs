@@ -33,8 +33,19 @@ namespace Devpendent.Controllers
             ViewBag.PageRange = pageSize;
             ViewBag.CategorySlug = categorySlug;
 
-            ViewData["TitleSortParam"] = String.IsNullOrEmpty(sortOrder) ? "title_sort" : "";
-            ViewData["BudgetSortParam"] = sortOrder == "Budget" ? "budget_sort" : "budget_sort";
+            if (sortOrder != null)
+            {
+                //if sortOrder is not null, update the session to store the new sort order
+                HttpContext.Session.SetString("sortOrder", sortOrder);
+            }
+            else if (HttpContext.Session.GetString("sortOrder") != null)
+            {
+                sortOrder = HttpContext.Session.GetString("sortOrder");
+            }
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.TitleSort = "title_sort";
+            ViewBag.BudgetSort = "budget_sort";
 
             if (categorySlug == "")
             {
@@ -44,8 +55,8 @@ namespace Devpendent.Controllers
 
                 switch (sortOrder)
                 {
-                    case "title_sort":
                     default:
+                    case "title_sort":
                         projects = projects.OrderBy(p => p.Title);
                         break;
 
@@ -66,13 +77,13 @@ namespace Devpendent.Controllers
 
             switch (sortOrder)
             {
-                case "title_sort":
                 default:
+                case "title_sort":
                     projectsByCategory = projectsByCategory.OrderBy(p => p.Title);
                     break;
 
                 case "budget_sort":
-                    projectsByCategory = projectsByCategory.OrderBy(p => p.Title);
+                    projectsByCategory = projectsByCategory.OrderBy(p => p.Budget);
                     break;
             }
 

@@ -7,8 +7,13 @@
 <h1>Projects</h1>
 
 <h2>Sort by</h2>
-<a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParam"]">Title</a>
-<a asp-action="Index" asp-route-sortOrder="@ViewData["BudgetSortParam"]">Budget</a>
+<a asp-action="Index" asp-route-sortOrder="@ViewBag.TitleSort">Title</a>
+<a asp-action="Index" asp-route-sortOrder="@ViewBag.BudgetSort">Budget</a>
+
+@if (ViewBag.CurrentSort != null)
+{
+    <p>Currently sorting by: @ViewBag.CurrentSort</p>
+}
 
 <div class="row">
     @foreach (var item in Model)
