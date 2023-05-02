@@ -28,12 +28,16 @@ namespace Devpendent.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(string sortOrder, string categorySlug = "", int p = 1)
+        public async Task<IActionResult> Index(string sortOrder, string searchString ,string categorySlug = "", int p = 1)
         {
             int pageSize = 3;
             ViewBag.PageNumber = p;
             ViewBag.PageRange = pageSize;
             ViewBag.CategorySlug = categorySlug;
+
+            string[] sortOptions = { "Title", "Budget" };
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.SortOptions = sortOptions;
 
             if (sortOrder != null)
             {
@@ -45,24 +49,25 @@ namespace Devpendent.Controllers
                 sortOrder = HttpContext.Session.GetString("sortOrder");
             }
 
-            ViewBag.CurrentSort = sortOrder;
-            string[] sortOptions = { "title_sort", "budget_sort" };
-            ViewBag.SortOptions = sortOptions;
+            var projects = from x in _context.Projects select x;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                projects = projects.Where(p => p.Title.Contains(searchString));
+            }
 
             if (categorySlug == "")
             {
                 ViewBag.TotalPages = (int)Math.Ceiling((decimal)_context.Projects.Count() / pageSize);
 
-                var projects = from x in _context.Projects select x;
-
                 switch (sortOrder)
                 {
                     default:
-                    case "title_sort":
+                    case "Title":
                         projects = projects.OrderBy(p => p.Title);
                         break;
 
-                    case "budget_sort":
+                    case "Budget":
                         projects = projects.OrderBy(p => p.Budget);
                         break;
                 }

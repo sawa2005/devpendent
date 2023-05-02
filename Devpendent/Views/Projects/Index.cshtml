@@ -15,6 +15,14 @@
     @Html.DropDownList("sort-select", new SelectList(ViewBag.SortOptions), "Sort by")
 }
 
+@using (Html.BeginForm())
+{
+    <p>
+        Find by title: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 @if (ViewBag.CurrentSort != null)
 {
     <p>Currently sorting by: @ViewBag.CurrentSort</p>
