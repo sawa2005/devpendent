@@ -7,8 +7,13 @@
 <h1>Projects</h1>
 
 <h2>Sort by</h2>
-<a asp-action="Index" asp-route-sortOrder="@ViewBag.TitleSort">Title</a>
-<a asp-action="Index" asp-route-sortOrder="@ViewBag.BudgetSort">Budget</a>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.DropDownList("sort-select", new SelectList(ViewBag.SortOptions), "Sort by")
+}
 
 @if (ViewBag.CurrentSort != null)
 {
@@ -44,3 +49,35 @@
 }
 
 </div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "/Projects/GetSort",
+                success: function (data) {
+                    $("#sort-select").val(data);
+                }
+            });
+
+            // Change sort on drop-down change
+            $("#sort-select").change(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Projects/SetSort",
+                    data: { sort: $("#sort-select").val() },
+                    success: function (data) {
+                        location.reload();
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+}

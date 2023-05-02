@@ -10,6 +10,8 @@ using Devpendent.Models;
 using Devpendent.Data;
 using Microsoft.AspNetCore.Identity;
 using Devpendent.Areas.Identity.Data;
+using System.Drawing.Printing;
+using Microsoft.Data.SqlClient;
 
 namespace Devpendent.Controllers
 {
@@ -44,8 +46,8 @@ namespace Devpendent.Controllers
             }
 
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.TitleSort = "title_sort";
-            ViewBag.BudgetSort = "budget_sort";
+            string[] sortOptions = { "title_sort", "budget_sort" };
+            ViewBag.SortOptions = sortOptions;
 
             if (categorySlug == "")
             {
@@ -90,7 +92,26 @@ namespace Devpendent.Controllers
             return View(await projectsByCategory.Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
         }
 
-        // GET: Projects
+        [HttpPost]
+        public IActionResult SetSort(string sort)
+        {
+            if (sort == null)
+            {
+                return View();
+            }
+
+            HttpContext.Session.SetString("sortOrder", sort);
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public IActionResult GetSort()
+        {
+            return Json(HttpContext.Session.GetString("sortOrder"));
+        }
+
+        // GET: Projects/Manage
         public async Task<IActionResult> Manage()
         {
             var dataContext = _context.Projects.Include(p => p.Category);
