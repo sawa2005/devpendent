@@ -28,3 +28,26 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+const navbar = document.querySelector('.navbar-collapse');
+const text = document.querySelector('.home-text');
+
+function callback(mutationsList, observer) {
+    console.log('Mutations:', mutationsList)
+    console.log('Observer:', observer)
+    mutationsList.forEach(mutation => {
+        if (mutation.attributeName === 'class') {
+            if (navbar.classList.contains('show') || navbar.classList.contains('collapsing')) {
+                text.style.opacity = 0;
+            }
+
+            else {
+                text.style.opacity = 1;
+            }
+        }
+    })
+}
+
+const mutationObserver = new MutationObserver(callback)
+
+mutationObserver.observe(navbar, { attributes: true })

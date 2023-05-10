@@ -1,5 +1,277 @@
-.footer {
+h1 {
+  font-family: "paralucent", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 2.6rem;
+}
+
+h2 {
+  font-family: "paralucent", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 2.222rem;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: "paralucent", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.556rem;
+}
+
+p {
+  font-family: "nimbus-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.111rem;
+}
+
+a {
+  font-family: "nimbus-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #317E53;
+  text-decoration: underline;
+}
+
+body {
+  color: #000;
+  overflow-x: hidden;
+}
+
+.container, .container-fluid, .row > * {
+  padding: 0 !important;
+}
+
+.row {
+  margin: 0 !important;
+}
+
+.navbar-toggler {
+  padding: 0 !important;
+}
+
+.mt-section {
+  margin-top: 120px;
+}
+
+.border-footer {
+  border-top: 2px solid #CECECE;
+}
+
+main {
+  padding-bottom: 120px;
+}
+
+.navbar {
+  padding: 40px;
+}
+.navbar li {
+  height: min-content;
+}
+
+.navbar-nav {
+  gap: 20px;
+  align-items: center;
+}
+
+.home-main {
   position: relative;
+  width: 100%;
+  color: #fff;
+}
+.home-main .nav-link {
+  font-family: "paralucent", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.15rem;
+}
+.home-main .btn {
+  border: 1px solid #fff;
+  border-radius: 15px;
+  padding: 8px 15px !important;
+}
+
+.home-logo {
+  content: url("/media/logo_white.png");
+}
+
+.home-bg {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-text {
+  position: absolute;
+  padding: 0px 40px;
+  text-align: right;
+  max-width: 900px;
+  width: 100%;
+  height: fit-content;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 50vh;
+  bottom: 0;
+  transition: opacity 0.3s ease;
+}
+
+.home-desc {
+  display: block;
+  font-family: "nimbus-sans", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  max-width: 600px;
+  margin-left: auto;
+}
+
+.home-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.category-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 30px;
+}
+
+.category {
+  height: 343px;
+  width: 307px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  border-radius: 25px;
+}
+.category > div {
+  padding: 16px;
+  background: linear-gradient(rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%);
+  border-radius: 25px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.category .btn {
+  background-color: #317E53;
+  color: white;
+  border-radius: 13px;
+  font-family: paralucent, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  padding: 5px 15px;
+}
+
+.category-link {
+  text-align: center;
+}
+
+.instruction-wrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.instruction {
+  max-width: 636px;
+  background: linear-gradient(#CAF1F6, rgba(0, 0, 0, 0));
+  border-radius: 30px;
+  padding: 22px;
+  width: 50%;
+}
+.instruction div {
+  display: flex;
+  gap: 18px;
+}
+
+.footer {
+  position: initial !important;
+}
+
+.footer-main {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  max-width: 1404px;
+  margin: auto;
+  padding: 40px 50px;
+  flex-wrap: wrap;
+}
+.footer-main a {
+  display: block;
+  font-family: paralucent, sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  color: #000 !important;
+  text-decoration: none;
+}
+
+.copyright {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+@media (hover: hover) {
+  .btn {
+    transition: 0.2s ease;
+  }
+  .home-main .btn:hover {
+    background: rgba(1, 1, 1, 0.2);
+  }
+  .btn:hover {
+    background-color: #45BC79;
+  }
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  .footer a:hover {
+    text-decoration: underline;
+  }
+}
+@media (max-width: 680px) {
+  .home-logo {
+    content: url("/media/logo_mobile_white.png");
+  }
+}
+@media (max-width: 575px) {
+  .navbar {
+    padding: 18px 21px;
+  }
+  .home-text {
+    padding: 0px 20px;
+  }
+  main {
+    padding: 20px;
+  }
+  .category-wrap {
+    justify-content: center;
+  }
+  .category {
+    width: 100%;
+  }
+  .instruction-wrap {
+    flex-direction: column;
+  }
+  .instruction {
+    width: 100%;
+  }
+  .copyright {
+    font-size: 0.8rem;
+  }
+  .footer-main {
+    flex-direction: column;
+    gap: 50px;
+  }
+  .navbar-collapse {
+    margin-top: 80px;
+  }
 }
 
 /*# sourceMappingURL=site.css.map */

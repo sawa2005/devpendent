@@ -7,55 +7,58 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Devpendent.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://use.typekit.net/iuj7zna.css">
 </head>
 <body>
-    <div>
-        <img src="/media/background.jpg" alt="Desk in front of a wall" />
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/media/logo_white.png" alt="Devpendent Logo"/></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
-                            </li>
-                        </ul>
-                        <partial name="_LoginPartial" />
+    <div class="home-main">
+        <img class="home-bg" src="/media/background.jpg" alt="Desk in front of a wall" />
+        <div class="home-overlay">
+            <header>
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="home-logo" alt="Devpendent Logo" /></a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="21" viewBox="0 0 30 21">
+                                    <g transform="translate(-3 -7.5)">
+                                        <path d="M4.5,18h27" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                                        <path d="M4.5,9h27" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                                        <path d="M4.5,27h27" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                                    </g>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Projects" asp-action="Index">Browse</a>
+                                </li>
+                                <partial name="_LoginPartial" />
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
-        </header>
-        <div>
-            <h1 class="home-title">Hire freelance developers on your own terms</h1>
-            <p class="home-desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quam est, tempus ut dictum vitae, porta vitae arcu. Nunc quis scelerisque arcu. Proin vitae metus malesuada, semper magna in, faucibus ex. Donec at dui dolor. Duis auctor ultricies nulla, nec sodales metus pulvinar id. Nullam tristique egestas orci, eu pretium libero mollis sit amet. Proin at condimentum neque, quis ultricies metus. Aliquam non commodo magna, eget ullamcorper metus. Pellentesque neque nulla, dignissim sed varius vitae, bibendum id velit.
-            </p>
+                </nav>
+            </header>
+            <div class="home-text">
+                <h1 class="home-title">Hire freelance developers on your own terms</h1>
+                <p class="home-desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quam est, tempus ut dictum vitae, porta vitae arcu. Nunc quis scelerisque arcu. Proin vitae metus malesuada, semper magna in, faucibus ex. Donec at dui dolor. Duis auctor ultricies nulla, nec sodales metus pulvinar id. Nullam tristique egestas orci, eu pretium libero mollis sit amet. Proin at condimentum neque, quis ultricies metus. Aliquam non commodo magna, eget ullamcorper metus. Pellentesque neque nulla, dignissim sed varius vitae, bibendum id velit.
+                </p>
+            </div>
         </div>
     </div>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main">
             <div class="row">
-                <!-- <div class="col-3">
-                    <vc:categories />
-                </div> -->
-                <div class="col mt-4">
-                    <partial name="_NotificationPartial" />
-                    @RenderBody()
-                </div>
+                <partial name="_NotificationPartial" />
+                @RenderBody()
             </div>
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div>
+    <footer class="footer border-footer">
+        <div class="footer-main">
             <div>
                 <h3>Categories</h3>
                 <a href="#">Lorem Ipsum</a>
@@ -93,8 +96,8 @@
                 <a href="#">Lorem Ipsum</a>
             </div>
         </div>
-        <div class="container">
-            &copy; 2023 - Devpendent - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="text-muted border-footer">
+            <p class="copyright">&copy; 2023 - DEVPENDENT - Made by <a href="https://slw.one">Samuel Ward</a></p>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
