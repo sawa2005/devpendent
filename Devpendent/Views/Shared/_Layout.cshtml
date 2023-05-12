@@ -12,7 +12,7 @@
 <body>
     <div class="default-main">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm" aria-label="main">
                 <div class="container-fluid">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="default-logo" alt="Devpendent Logo" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -56,6 +56,26 @@
     </div>
     <div class="container">
         <main role="main">
+
+            @if (ViewBag.Breadcrumbs != null)
+            {
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-white justify-content-center justify-content-md-start justify-content-lg-start justify-content-xl-start">
+                        @foreach (var breadcrumb in ViewBag.Breadcrumbs as List<Breadcrumb>)
+                        {
+                            if (breadcrumb.Active)
+                            {
+                                <li class="breadcrumb-item active"><a asp-action="@breadcrumb.Action" asp-controller="@breadcrumb.Controller">@breadcrumb.Text</a></li>
+                            }
+                            else
+                            {
+                                <li class="breadcrumb-item" aria-current="page">@breadcrumb.Text</li>
+                            }
+                        }
+                    </ol>
+                </nav>
+            }
+
             <div class="row">
                 <partial name="_NotificationPartial" />
                 @RenderBody()

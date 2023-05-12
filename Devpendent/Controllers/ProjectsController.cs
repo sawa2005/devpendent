@@ -12,9 +12,12 @@ using Microsoft.AspNetCore.Identity;
 using Devpendent.Areas.Identity.Data;
 using System.Drawing.Printing;
 using Microsoft.Data.SqlClient;
+using Devpendent.Filters;
+using System.Security.Claims;
 
 namespace Devpendent.Controllers
 {
+    [BreadcrumbActionFilter]
     public class ProjectsController : Controller
     {
         private readonly DevpendentContext _context;
@@ -72,10 +75,14 @@ namespace Devpendent.Controllers
                         break;
                 }
 
-                return View(await projects.Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
+                ViewBag.ProjectCount = projects.Count();
+
+                return View(await projects.Include(p => p.User).Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
             }
 
             Category category = await _context.Categories.Where(c => c.Slug == categorySlug).FirstOrDefaultAsync();
+
+            ViewBag.CategoryName = category.Name;
 
             if (category == null) return RedirectToAction("Index");
 
@@ -94,7 +101,9 @@ namespace Devpendent.Controllers
                     break;
             }
 
-            return View(await projectsByCategory.Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
+            ViewBag.ProjectCount = projectsByCategory.Count();
+
+            return View(await projectsByCategory.Include(p => p.User).Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
         }
 
         [HttpPost]
@@ -186,7 +195,10 @@ namespace Devpendent.Controllers
                     project.Image = imageName;
                 }
 
-                var userId = _userManager.GetUserId(User);
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+                var userId = claims.Value;
                 project.UserId = userId;
 
                 _context.Add(project);

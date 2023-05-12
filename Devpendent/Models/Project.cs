@@ -42,6 +42,6 @@ namespace Devpendent.Models
 
         public string UserId { get; set; }
 
-        public DevpendentUser User { get; set; } = new DevpendentUser();
+        public DevpendentUser User { get; set; }
     }
 }

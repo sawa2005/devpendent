@@ -1,9 +1,11 @@
-﻿using Devpendent.Models;
+﻿using Devpendent.Filters;
+using Devpendent.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Devpendent.Controllers
 {
+    [BreadcrumbActionFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

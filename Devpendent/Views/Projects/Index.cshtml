@@ -4,18 +4,29 @@
     ViewData["Title"] = "Browse Projects";
 }
 
-<h1>Projects</h1>
-
-<h2>Sort by</h2>
-
-@using (Html.BeginForm())
+@if (ViewBag.CategorySlug != null)
 {
-    @Html.AntiForgeryToken()
-
-    @Html.DropDownList("sort-select", new SelectList(ViewBag.SortOptions), "Sort by")
+    <h1>@ViewBag.CategoryName Projects</h1>
 }
 
-@using (Html.BeginForm())
+else {
+    <h1>All projects</h1>
+}
+
+<div>
+    <div>
+        <p>@ViewBag.ProjectCount projects available</p>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <label for="sort-select">Sort by</label> @Html.DropDownList("sort-select", new SelectList(ViewBag.SortOptions), "Recent")
+        }
+    </div>
+</div>
+
+@*@using (Html.BeginForm())
 {
     <p>
         Find by title: @Html.TextBox("SearchString")
@@ -23,27 +34,48 @@
     </p>
 }
 
-@if (ViewBag.CurrentSort != null)
+if (ViewBag.CurrentSort != null)
 {
     <p>Currently sorting by: @ViewBag.CurrentSort</p>
-}
+}*@
 
 <div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-4">
-            <img src="/media/projects/@item.Image" class="img-fluid" alt="Project thumbnail" />
-            <h4>@item.Title</h4>
-            <p>@item.User.FirstName @item.User.LastName</p>
-            <div> 
-                @Html.Raw(item.Description)
-            </div>
-            <div>
-                <p>@item.Budget</p>
-                <p>@item.DeliveryTime</p>
-            </div>
+    <div>
+        <div class="category-wrap">
+            @foreach (var item in Model)
+            {
+                <div class="category">
+                    <div>
+                        <h3>@item.Title</h3>
+                        <img src="/media/projects/@item.Image" alt="@item.Title Thumbnail">
+                        <div>
+                            <div>
+                                <img src="/media/users/@item.User.Image">
+                                <div>
+                                    <h5>@item.User.FirstName @item.User.LastName</h5>
+                                    <p>@item.User.UserName</p>
+                                </div>
+                            </div>
+                            <div>
+                                @Html.Raw(item.Description)
+                            </div>
+                            <div>
+                                <div>
+                                    <h4>Delivery Time</h4>
+                                    <h3>@item.DeliveryTime</h3>
+                                </div>
+                                <div>
+                                    <h4>Budget</h4>
+                                    <h3>@item.Budget</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn" asp-controller="Projects" asp-action="Index" asp-route-categorySlug="@item.Slug">Browse</a>
+                    </div>
+                </div>
+            }
         </div>
-    }
+    </div>
 
 @if (ViewBag.TotalPages > 1)
 {

@@ -362,8 +362,18 @@ main {
     flex-direction: column;
     gap: 50px;
   }
-  .navbar-collapse {
-    margin-top: 80px;
+  .default-main .navbar-nav {
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    padding: 20px 0px;
+    height: 300px;
+  }
+  .search-wrap {
+    width: 100% !important;
+    flex-basis: unset;
+  }
+  #search-form {
+    height: 52px;
   }
 }
 

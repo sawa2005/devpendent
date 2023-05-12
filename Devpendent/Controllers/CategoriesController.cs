@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Devpendent.Data;
 using Devpendent.Models;
+using Devpendent.Filters;
 
 namespace Devpendent.Controllers
 {
+    [BreadcrumbActionFilter]
     public class CategoriesController : Controller
     {
         private readonly DevpendentContext _context;
