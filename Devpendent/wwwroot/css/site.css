@@ -64,13 +64,6 @@ main {
   padding-bottom: 120px;
 }
 
-.navbar {
-  padding: 40px;
-}
-.navbar li {
-  height: min-content;
-}
-
 .navbar-nav {
   gap: 20px;
   align-items: center;
@@ -80,6 +73,12 @@ main {
   position: relative;
   width: 100%;
   color: #fff;
+}
+.home-main .navbar {
+  padding: 40px;
+}
+.home-main .navbar li {
+  height: min-content;
 }
 .home-main .nav-link {
   font-family: "paralucent", sans-serif;
@@ -93,8 +92,46 @@ main {
   padding: 8px 15px !important;
 }
 
+.default-main .navbar {
+  padding: 20px 40px;
+  border-bottom: 2px solid #CECECE;
+  margin-bottom: 100px;
+}
+.default-main .navbar a {
+  line-height: 0;
+  width: max-content;
+}
+.default-main .navbar a.btn {
+  line-height: 32px !important;
+}
+.default-main .navbar li {
+  height: min-content;
+  width: max-content;
+}
+.default-main .navbar-nav {
+  flex-basis: 763px;
+  justify-content: end;
+}
+.default-main .nav-link {
+  font-family: "paralucent", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.15rem;
+  color: #000;
+}
+.default-main .btn {
+  color: #317E53;
+  border: 2px solid #317E53;
+  border-radius: 15px;
+  padding: 8px 15px !important;
+}
+
 .home-logo {
   content: url("/media/logo_white.png");
+}
+
+.default-logo {
+  content: url("/media/logo_black.png");
 }
 
 .home-bg {
@@ -190,9 +227,16 @@ main {
   display: flex;
   gap: 18px;
 }
+.instruction h3 {
+  margin-bottom: 25px;
+}
 
 .footer {
   position: initial !important;
+  line-height: 20px !important;
+}
+.footer a {
+  margin-bottom: 20px;
 }
 
 .footer-main {
@@ -212,15 +256,56 @@ main {
   color: #000 !important;
   text-decoration: none;
 }
+.footer-main h3 {
+  margin-bottom: 25px;
+}
 
 .copyright {
   text-align: center;
   margin-bottom: 0;
+  padding-top: 20px;
+}
+
+.search-wrap {
+  width: 100%;
+  flex-basis: 350px;
+  display: flex;
+}
+
+#SearchString {
+  border: none;
+  font-family: paralucent, sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  background: none;
+  width: 100%;
+}
+
+#SearchString:focus-visible {
+  outline: none;
+}
+
+#search-form {
+  border: 2px solid #000;
+  border-radius: 18px;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+#search-form button {
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 @media (hover: hover) {
   .btn {
     transition: 0.2s ease;
+  }
+  .default-main .btn:hover {
+    color: #fff;
+    border-color: #45BC79;
   }
   .home-main .btn:hover {
     background: rgba(1, 1, 1, 0.2);
@@ -235,9 +320,17 @@ main {
     text-decoration: underline;
   }
 }
-@media (max-width: 680px) {
+@media (max-width: 910px) {
+  .default-logo {
+    content: url("/media/logo_mobile_black.png");
+  }
+}
+@media (max-width: 700px) {
   .home-logo {
     content: url("/media/logo_mobile_white.png");
+  }
+  .search-wrap {
+    width: auto !important;
   }
 }
 @media (max-width: 575px) {

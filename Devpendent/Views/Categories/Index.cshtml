@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Devpendent.Models.Category>
+
+@{
+    ViewData["Title"] = "Browse all categories";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<h1>Browse all categories</h1>
+
+<div class="instruction-wrap mt-3 mb-5">
+    <div class="instruction">
+        <h3>Find the perfect developer for your project</h3>
+        <div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar eu erat et tincidunt. Quisque commodo nisi lorem, id fringilla sem faucibus in. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="category-wrap">
+        @foreach (var item in Model)
+        {
+            <div class="category" style="background-image: url('/media/categories/@item.Image');">
+                <div>
+                    <div>
+                        <h3>@item.Name</h3>
+                        <p>@item.Description</p>
+                    </div>
+                    <a class="btn" asp-controller="Projects" asp-action="Index" asp-route-categorySlug="@item.Slug">Browse</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

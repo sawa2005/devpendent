@@ -10,45 +10,100 @@
     <link rel="stylesheet" href="https://use.typekit.net/iuj7zna.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/media/logo_black.png" alt="Devpendent Logo"/></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
+    <div class="default-main">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="default-logo" alt="Devpendent Logo" /></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="21" viewBox="0 0 30 21">
+                                <g transform="translate(-3 -7.5)">
+                                    <path d="M4.5,18h27" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                                    <path d="M4.5,9h27" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                                    <path d="M4.5,27h27" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                                </g>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Projects" asp-action="Index">Browse</a>
+                            </li>
+                            <partial name="_LoginPartial" />
+                            <li class="search-wrap">
+                                @using (Html.BeginForm("Projects", "Search", FormMethod.Post, new { id = "search-form" }))
+                                {
+                                    @Html.TextBox("SearchString", "", new { placeholder = "What project do you need done?" })
+                                    <button type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="49" height="48" viewBox="0 0 49 48">
+                                            <g stroke="#000" stroke-width="1">
+                                                <path d="M0,0H34A15,15,0,0,1,49,15V33A15,15,0,0,1,34,48H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" stroke="none" />
+                                                <path d="M.5.5H34A14.5,14.5,0,0,1,48.5,15V33A14.5,14.5,0,0,1,34,47.5H.5a0,0,0,0,1,0,0V.5A0,0,0,0,1,.5.5Z" fill="none" />
+                                            </g>
+                                            <path d="M24.26,23.045,18.7,17.432a7.925,7.925,0,1,0-1.2,1.218l5.525,5.577a.856.856,0,0,0,1.208.031A.861.861,0,0,0,24.26,23.045ZM12.472,18.718A6.258,6.258,0,1,1,16.9,16.886,6.219,6.219,0,0,1,12.472,18.718Z" transform="translate(10.002 9.507)" fill="#fff" />
+                                        </svg>
+                                    </button>
+                                }
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
+    </div>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main">
             <div class="row">
-                <div class="col-3">
-                    <vc:categories />
-                </div>
-                <div class="col mt-4">
-                    <partial name="_NotificationPartial" />
-                    @RenderBody()
-                </div>
+                <partial name="_NotificationPartial" />
+                @RenderBody()
             </div>
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Devpendent - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer border-footer">
+        <div class="footer-main">
+            <div>
+                <h3>Categories</h3>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+            </div>
+            <div>
+                <h3>About</h3>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+            </div>
+            <div>
+                <h3>Support</h3>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+            </div>
+        </div>
+        <div class="text-muted border-footer">
+            <p class="copyright">&copy; 2023 - DEVPENDENT - Made by <a href="https://slw.one">Samuel Ward</a></p>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
