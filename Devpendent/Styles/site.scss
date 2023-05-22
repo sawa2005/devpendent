@@ -20,6 +20,20 @@ h3 {
     font-size: 1.556rem;
 }
 
+h4 {
+    font-family: "paralucent", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.25rem;
+}
+
+h5 {
+    font-family: "paralucent", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.938rem;
+}
+
 p {
     font-family: "nimbus-sans", sans-serif;
     font-weight: 400;
@@ -224,6 +238,147 @@ main {
     text-align: center;
 }
 
+.project-wrap {
+    width: max-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 60px;
+    row-gap: 30px;
+}
+
+.project {
+    border: 1px #000 solid;
+    border-radius: 30px;
+    width: 388px;
+
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+
+    .project-thumb-wrap {
+        background-size: 100%;
+        transition: background-size 0.3s ease;
+    }
+
+    > div {
+        border-radius: 25px;
+        z-index: 99;
+    }
+
+    .btn {
+        background-color: #317E53;
+        color: white;
+        border-radius: 13px;
+        font-family: paralucent, sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        padding: 5px 15px;
+    }
+}
+
+.project-pfp {
+    width: 33px;
+    height: 33px;
+    border-radius: 8px;
+}
+
+.project-thumb-wrap {
+    padding: 16px;
+    color: #fff;
+    height: 220px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 25px 25px 0px 0px;
+}
+
+.project-text-wrap {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-desc-wrap {
+    a {
+        color: #317E53;
+        text-decoration: underline;
+    }
+}
+
+.project-user-wrap {
+    display: flex;
+    gap: 8px;
+
+    h5 {
+        margin: 0;
+        line-height: 0.95rem;
+    }
+
+    p {
+        margin: 0;
+        font-weight: 300;
+        font-size: 0.813rem;
+        line-height: 0.8rem;
+    }
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+.project-info-wrap {
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+        margin: 0;
+        font-family: nimbus-sans, sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 1.438rem;
+    }
+
+    h4 {
+        margin: 0;
+        font-family: nimbus-sans, sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        font-size: 1.125rem;
+    }
+}
+
+.project-list-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+        margin: 0;
+        font-weight: 300;
+    }
+
+    form {
+        font-family: nimbus-sans, sans-serif;
+        font-weight: 300;
+        font-style: normal;
+
+        select {
+            border: none;
+            font-weight: 400;
+
+        }
+    }
+}
+
+.budget-wrap {
+    text-align: right;
+}
+
 .instruction-wrap {
     display: flex;
     justify-content: space-between;
@@ -343,6 +498,10 @@ main {
 
     .footer a:hover {
         text-decoration: underline;
+    }
+
+    .project a:hover .project-thumb-wrap {
+        background-size: 110%;
     }
 }
 

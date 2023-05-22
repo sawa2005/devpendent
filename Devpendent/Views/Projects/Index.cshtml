@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Devpendent.Models.Project>
+﻿@using Devpendent.Infrastructure.Extensions;
+@model IEnumerable<Devpendent.Models.Project>
 
 @{
-    ViewData["Title"] = "Browse Projects";
+    ViewData["Title"] = "Browse " + ViewBag.CategoryName + " Projects";
 }
 
 @if (ViewBag.CategorySlug != null)
@@ -13,8 +14,8 @@ else {
     <h1>All projects</h1>
 }
 
-<div>
-    <div>
+<div class="my-3">
+    <div class="project-list-info">
         <p>@ViewBag.ProjectCount projects available</p>
 
         @using (Html.BeginForm())
@@ -41,37 +42,39 @@ if (ViewBag.CurrentSort != null)
 
 <div class="row">
     <div>
-        <div class="category-wrap">
+        <div class="project-wrap">
             @foreach (var item in Model)
             {
-                <div class="category">
-                    <div>
-                        <h3>@item.Title</h3>
-                        <img src="/media/projects/@item.Image" alt="@item.Title Thumbnail">
+                <div class="project">
+                    <a asp-action="Details" asp-route-id="@item.Id">
                         <div>
-                            <div>
-                                <img src="/media/users/@item.User.Image">
-                                <div>
-                                    <h5>@item.User.FirstName @item.User.LastName</h5>
-                                    <p>@item.User.UserName</p>
-                                </div>
+                            <div class="project-thumb-wrap" style="background-image: linear-gradient(rgba(0,0,0) 0%, rgba(0,0,0,0) 75%), url('/media/projects/@item.Image');">
+                                <h3>@item.Title</h3>
                             </div>
-                            <div>
-                                @Html.Raw(item.Description)
-                            </div>
-                            <div>
-                                <div>
-                                    <h4>Delivery Time</h4>
-                                    <h3>@item.DeliveryTime</h3>
+                            <div class="project-text-wrap">
+                                <div class="project-user-wrap">
+                                    <img src="/media/users/@item.User.Image" class="project-pfp">
+                                    <div>
+                                        <h5>@item.User.FirstName @item.User.LastName</h5>
+                                        <p>@item.User.UserName</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h4>Budget</h4>
-                                    <h3>@item.Budget</h3>
+                                <div class="mt-3 project-desc-wrap">
+                                    @Html.Raw(item.Description.Truncate(40))
+                                </div>
+                                <div class="project-info-wrap">
+                                    <div>
+                                        <h4>Delivery Time</h4>
+                                        <h3>@item.DeliveryTime</h3>
+                                    </div>
+                                    <div class="budget-wrap">
+                                        <h4>Budget</h4>
+                                        <h3>@item.Budget</h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="btn" asp-controller="Projects" asp-action="Index" asp-route-categorySlug="@item.Slug">Browse</a>
-                    </div>
+                    </a>
                 </div>
             }
         </div>
