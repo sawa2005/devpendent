@@ -648,6 +648,27 @@ main {
     .project-wrap {
         justify-content: center;
     }
+
+    .user-main-wrap {
+        flex-direction: column;
+        gap: 30px;
+
+        .shortinfo {
+            max-width: none;
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .user-profile-wrap {
+        flex-direction: column;
+
+        img {
+            max-width: none;
+            max-height: none;
+        }
+    }
 }
 
 @media (min-width: 576px) and (max-width: 800px) {
