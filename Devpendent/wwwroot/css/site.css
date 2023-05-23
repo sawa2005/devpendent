@@ -428,6 +428,37 @@ main {
   border: 1px solid #000;
 }
 
+.user-main-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.user-main-wrap h1 {
+  margin: 3px 0 0 0;
+  line-height: 1.8rem;
+}
+.user-main-wrap p {
+  margin: 0;
+}
+.user-main-wrap img {
+  max-width: 240px;
+  max-height: 240px;
+  border-radius: 15px;
+}
+.user-main-wrap .shortinfo {
+  max-width: 400px;
+}
+
+.user-profile-wrap {
+  display: flex;
+  gap: 25px;
+}
+
+.user-profile-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .footer {
   position: initial !important;
   line-height: 20px !important;

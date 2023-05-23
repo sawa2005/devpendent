@@ -38,7 +38,7 @@
                 <p>@Html.DisplayFor(model => model.DeliveryTime) Delivery</p>
             </div>
         </div>
-        <a class="btn btn-clear" asp-controller="Users" asp-action="Index" asp-route-id="@Html.DisplayFor(model => model.User.Id)">
+        <a class="btn btn-clear" href="mailto:@Model.User.Email">
             Contact this developer
             <svg xmlns="http://www.w3.org/2000/svg" width="16.68" height="16.68" viewBox="0 0 16.68 16.68">
                 <path d="M19.88,14.753a1.709,1.709,0,0,1-1.709,1.709H7.918L4.5,19.88V6.209A1.709,1.709,0,0,1,6.209,4.5H18.171A1.709,1.709,0,0,1,19.88,6.209Z" transform="translate(-3.85 -3.85)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
@@ -62,7 +62,7 @@
                     <p>@Html.DisplayFor(model => model.User.UserName)</p>
                 </div>
                 <p>Implement user specialty</p>
-                <a class="btn btn-clear" asp-controller="Users" asp-action="Index" asp-route-id="@Html.DisplayFor(model => model.User.Id)">View profile</a>
+                <a class="btn btn-clear" asp-controller="Users" asp-action="Profile" asp-route-userName="@Model.User.UserName">View profile</a>
             </div>
         </div>
     </div>

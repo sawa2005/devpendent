@@ -16,6 +16,7 @@ public class DevpendentContext : IdentityDbContext<DevpendentUser>
     public DbSet<Category> Categories { get; set; }
     public DbSet<Education> Educations { get; set; }
     public DbSet<Job> Jobs { get; set; }
+    public DbSet<DevpendentUser> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
