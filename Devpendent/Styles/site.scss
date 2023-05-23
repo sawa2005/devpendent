@@ -239,11 +239,11 @@ main {
 }
 
 .project-wrap {
-    width: max-content;
+    width: fit-content;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 60px;
+    gap: 77px;
     row-gap: 30px;
 }
 
@@ -405,6 +405,7 @@ main {
 .footer {
     position: initial !important;
     line-height: 20px !important;
+    margin-top: 75px;
 
     a {
         margin-bottom: 20px;
@@ -517,21 +518,51 @@ main {
     .project a:hover .project-thumb-wrap {
         background-size: 110%;
     }
-}
 
-@media (max-width: 910px) {
-    .default-logo {
-        content: url("/media/logo_mobile_black.png");
+    #logout:hover {
+        background-color: initial;
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
+    .default-logo {
+        content: url("/media/logo_mobile_black.png");
+    }
+
     .home-logo {
         content: url("/media/logo_mobile_white.png");
     }
 
     .search-wrap {
         width: auto !important;
+    }
+
+    .container {
+        padding: 0px 20px !important;
+    }
+
+    .project-wrap {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 800px) {
+    .container-fluid {
+        position: relative;
+    }
+
+    .navbar-brand {
+        position: absolute;
+        top: 0;
+    }
+
+    .navbar-nav {
+        flex-wrap: wrap;
+    }
+
+    .search-wrap {
+        margin: auto;
+        flex-basis: 100%;
     }
 }
 
@@ -553,6 +584,14 @@ main {
     }
 
     .category {
+        width: 100%;
+    }
+
+    .project-wrap {
+        justify-content: center;
+    }
+
+    .project {
         width: 100%;
     }
 
