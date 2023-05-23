@@ -1,60 +1,73 @@
 ﻿@model Devpendent.Models.Project
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Html.DisplayFor(model => model.Title);
 }
 
-<h1>Details</h1>
+<h1>@Html.DisplayFor(model => model.Title)</h1>
 
-<div>
-    <h4>Project</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Slug)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Slug)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Budget)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Budget)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeliveryTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeliveryTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.Id)
-        </dd>
-    </dl>
+<div class="project-user-wrap">
+    <img src="/media/users/@Html.DisplayFor(model => model.User.Image)" class="project-pfp"/>
+    <div>
+        <h5>@Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)</h5>
+        <p>@Html.DisplayFor(model => model.User.UserName)</p>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="project-image-wrap my-5">
+    <img src="/media/projects/@Html.DisplayFor(model => model.Image)"/>
+    <div class="shortinfo">
+        <h3>Short info</h3>
+        <div class="mb-4">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="9.688" height="16.679" viewBox="0 0 9.688 16.679">
+                    <g transform="translate(0.65 0.65)">
+                        <path d="M18,1.5V16.879" transform="translate(-13.805 -1.5)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                        <path d="M16.689,7.5H11.447a2.447,2.447,0,0,0,0,4.893h3.5a2.447,2.447,0,0,1,0,4.893H9" transform="translate(-9 -4.704)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                    </g>
+                </svg>
+                <p>@Html.DisplayFor(model => model.Budget) Budget</p>
+            </div>
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16.679" height="16.679" viewBox="0 0 16.679 16.679">
+                    <g transform="translate(0.65 0.65)">
+                        <path d="M18.379,10.689A7.689,7.689,0,1,1,10.689,3,7.689,7.689,0,0,1,18.379,10.689Z" transform="translate(-3 -3)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                        <path d="M18,9v4.614l3.076,1.538" transform="translate(-10.311 -5.924)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                    </g>
+                </svg>
+                <p>@Html.DisplayFor(model => model.DeliveryTime) Delivery</p>
+            </div>
+        </div>
+        <a class="btn btn-clear" asp-controller="Users" asp-action="Index" asp-route-id="@Html.DisplayFor(model => model.User.Id)">
+            Contact this developer
+            <svg xmlns="http://www.w3.org/2000/svg" width="16.68" height="16.68" viewBox="0 0 16.68 16.68">
+                <path d="M19.88,14.753a1.709,1.709,0,0,1-1.709,1.709H7.918L4.5,19.88V6.209A1.709,1.709,0,0,1,6.209,4.5H18.171A1.709,1.709,0,0,1,19.88,6.209Z" transform="translate(-3.85 -3.85)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="project-main-wrap">
+    <div class="mb-5">
+        <h3>About this project</h3>
+        @Html.Raw(Model.Description)
+    </div>
+    <div class="project-dev-wrap mb-5">
+        <h3>About this developer</h3>
+        <div>
+            <img src="/media/users/@Html.DisplayFor(model => model.User.Image)" />
+            <div>
+                <div>
+                    <h4>@Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)</h4>
+                    <p>@Html.DisplayFor(model => model.User.UserName)</p>
+                </div>
+                <p>Implement user specialty</p>
+                <a class="btn btn-clear" asp-controller="Users" asp-action="Index" asp-route-id="@Html.DisplayFor(model => model.User.Id)">View profile</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Frequently asked questions</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar eu erat et tincidunt. Quisque commodo nisi lorem, id fringilla sem faucibus in. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
 </div>
