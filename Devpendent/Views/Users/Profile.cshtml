@@ -15,7 +15,7 @@
                     <h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h1>
                     <p>@@@Html.DisplayFor(model => model.UserName)</p>
                 </div>
-                <p class="my-3">Implement user specialties</p>
+                <p class="my-3">Specializes in @Html.DisplayFor(model => model.Specialties).</p>
                 <div>
                     <div class="d-flex align-items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14.523" height="17.461" viewBox="0 0 14.523 17.461">
@@ -49,8 +49,28 @@
     </div>
     <div class="shortinfo">
         <h3>Contact me</h3>
-        <p>Implement user contact text.</p>
-        <a class="btn btn-clear mt-5" href="mailto:@Model.Email">
+        <p>@Html.DisplayFor(model => model.ContactText)</p>
+        <div class="mt-4">
+            @if (Model.PhoneNumber != null)
+            {
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16.271" height="16.301" viewBox="0 0 16.271 16.301">
+                        <path d="M18.138,14.23v2.258A1.505,1.505,0,0,1,16.5,17.994,14.9,14.9,0,0,1,10,15.683a14.678,14.678,0,0,1-4.516-4.516A14.9,14.9,0,0,1,3.174,4.641,1.505,1.505,0,0,1,4.672,3H6.93A1.505,1.505,0,0,1,8.435,4.295,9.665,9.665,0,0,0,8.962,6.41,1.505,1.505,0,0,1,8.623,8l-.956.956a12.043,12.043,0,0,0,4.516,4.516l.956-.956a1.505,1.505,0,0,1,1.588-.339,9.665,9.665,0,0,0,2.115.527,1.505,1.505,0,0,1,1.295,1.528Z" transform="translate(-2.517 -2.35)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                    </svg>
+                    <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                </div>
+            }
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16.784" height="13.3" viewBox="0 0 16.784 13.3">
+                    <g transform="translate(-2.108 -5.35)">
+                        <path d="M4.5,6h12A1.5,1.5,0,0,1,18,7.5v9A1.5,1.5,0,0,1,16.5,18H4.5A1.5,1.5,0,0,1,3,16.5v-9A1.5,1.5,0,0,1,4.5,6Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                        <path d="M18,9l-7.5,4.5L3,9" transform="translate(0 -1.5)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                    </g>
+                </svg>
+                <p>@Html.DisplayFor(model => model.Email)</p>
+            </div>
+        </div>
+        <a class="btn btn-clear mt-4" href="mailto:@Model.Email">
             Contact this developer
             <svg xmlns="http://www.w3.org/2000/svg" width="16.68" height="16.68" viewBox="0 0 16.68 16.68">
                 <path d="M19.88,14.753a1.709,1.709,0,0,1-1.709,1.709H7.918L4.5,19.88V6.209A1.709,1.709,0,0,1,6.209,4.5H18.171A1.709,1.709,0,0,1,19.88,6.209Z" transform="translate(-3.85 -3.85)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
@@ -75,7 +95,7 @@
                                     <img src="/media/users/@item.User.Image" class="project-pfp">
                                     <div>
                                         <h5>@item.User.FirstName @item.User.LastName</h5>
-                                        <p>@item.User.UserName</p>
+                                        <p>@@@item.User.UserName</p>
                                     </div>
                                 </div>
                                 <div class="mt-3 project-desc-wrap">
@@ -97,7 +117,7 @@
                 </div>
             }
         </div>
-    <a href="#" class="d-block my-3 text-center">Browse all @@@Model.UserName's projects</a>
+    <a asp-controller="Users" asp-action="Projects" asp-route-userName="@Model.UserName" class="d-block my-3 text-center">Browse all @@@Model.UserName's projects</a>
 </div>
 
 <div class="my-5">

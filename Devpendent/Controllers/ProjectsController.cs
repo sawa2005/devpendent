@@ -31,7 +31,7 @@ namespace Devpendent.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString ,string categorySlug = "", int p = 1)
+        public async Task<IActionResult> Index(string sortOrder, string searchString , string categorySlug = "", int p = 1)
         {
             int pageSize = 3;
             ViewBag.PageNumber = p;

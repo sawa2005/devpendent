@@ -34,7 +34,7 @@ h5, label, .nav-pills .nav-item {
     font-size: 0.938rem;
 }
 
-p, input {
+p, input, textarea {
     font-family: "nimbus-sans", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -458,6 +458,8 @@ main {
     font-style: normal;
     border-radius: 13px;
     border: 1px solid #000;
+    background: none;
+    color: #000;
 }
 
 .user-main-wrap {
@@ -625,6 +627,23 @@ main {
     }
 }
 
+.specialties-input-wrap {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    p {
+        position: absolute;
+    }
+
+    #Input_Specialties {
+        border: none;
+        padding-left: 115px;
+        padding-right: 0;
+        background: none;
+    }
+}
+
 .form-control {
     border: 1px solid #000;
     border-radius: 15px;
@@ -675,6 +694,10 @@ main {
     border: 0;
 }
 
+#contact-text {
+    min-height: 200px;
+}
+
 @media (hover: hover) {
     .btn {
         transition: 0.2s ease;
@@ -718,12 +741,16 @@ main {
         background-color: #317E53 !important;
     }
 
-    .nav-link:hover {
+    .nav-pills .nav-link:hover {
         background-color: #CECECE;
     }
 
     .btn-danger:hover {
         background-color: #dc3545;
+    }
+
+    .btn-clear:hover {
+        color: #000;
     }
 }
 

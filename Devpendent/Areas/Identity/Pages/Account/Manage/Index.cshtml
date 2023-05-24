@@ -33,14 +33,20 @@
                                     <label asp-for="Input.LastName" class="form-label"></label>
                                 </div>
                             </div>
-                            <div class="username-input-wrap d-flex align-items-center">
+                            <div class="username-input-wrap">
                                 <span class="prefix">@@</span>
                                 <div class="form-floating mb-3">
                                     <input asp-for="Input.Username" class="form-control" placeholder="Please choose your username." />
                                     <label asp-for="Input.Username" class="form-label"></label>
                                 </div>
                             </div>
-                            <p class="my-3">Implement user specialties</p>
+                            <div class="specialties-input-wrap">
+                                <p class="prefix">Specializes in</p>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.Specialties" class="form-control" placeholder="eg. HTML, CSS and JS" />
+                                    <label asp-for="Input.Specialties" class="form-label"></label>
+                                </div>
+                            </div>
                             <div>
                                 <div class="d-flex align-items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14.523" height="17.461" viewBox="0 0 14.523 17.461">
@@ -90,6 +96,11 @@
                     <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
                     <label asp-for="Input.PhoneNumber" class="form-label"></label>
                     <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-4">
+                    <label asp-for="Input.ContactText" class="form-label">Contact text</label>
+                    <textarea asp-for="Input.ContactText" id="contact-text" class="form-control pt-5"></textarea>
+                    <span asp-validation-for="Input.ContactText" class="text-danger"></span>
                 </div>
             </div>
             <input id="update-profile-button" type="submit" value="Save profile changes" class="btn btn-lg" />

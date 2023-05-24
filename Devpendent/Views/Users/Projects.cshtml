@@ -2,16 +2,17 @@
 @model IEnumerable<Devpendent.Models.Project>
 
 @{
-    ViewData["Title"] = "Browse " + ViewBag.CategoryName + " Projects";
+    ViewData["Title"] = "Browse @" + ViewBag.Username + "'s Projects";
 }
 
 @if (ViewBag.CategorySlug != null)
 {
-    <h1>@ViewBag.CategoryName Projects</h1>
+    <h1>@@@ViewBag.Username's @ViewBag.CategoryName projects</h1>
 }
 
-else {
-    <h1>All projects</h1>
+else
+{
+    <h1>@@@ViewBag.Username's projects</h1>
 }
 
 <div class="my-3">
@@ -80,16 +81,16 @@ if (ViewBag.CurrentSort != null)
         </div>
     </div>
 
-@if (ViewBag.TotalPages > 1)
-{
-    <div class="d-flex w-100 justify-content-center mt-5">
-        <pagination page-count="@ViewBag.TotalPages"
+    @if (ViewBag.TotalPages > 1)
+    {
+        <div class="d-flex w-100 justify-content-center mt-5">
+            <pagination page-count="@ViewBag.TotalPages"
                     page-target="/projects/@ViewBag.CategorySlug"
                     page-number="@ViewBag.PageNumber"
                     page-range="@ViewBag.PageRange">
-        </pagination>
-    </div>
-}
+            </pagination>
+        </div>
+    }
 
 </div>
 
@@ -101,7 +102,7 @@ if (ViewBag.CurrentSort != null)
 
             $.ajax({
                 type: "POST",
-                url: "/Projects/GetSort",
+                url: "/Users/GetSort",
                 success: function (data) {
                     $("#sort-select").val(data);
                 }
@@ -111,7 +112,7 @@ if (ViewBag.CurrentSort != null)
             $("#sort-select").change(function () {
                 $.ajax({
                     type: "POST",
-                    url: "/Projects/SetSort",
+                    url: "/Users/SetSort",
                     data: { sort: $("#sort-select").val() },
                     success: function (data) {
                         location.reload();

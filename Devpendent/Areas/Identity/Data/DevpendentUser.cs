@@ -24,6 +24,10 @@ public class DevpendentUser : IdentityUser
 
     public string Description { get; set; }
 
+    public string ContactText { get; set; }
+
+    public string Specialties { get; set; }
+
     public string Image { get; set; }
 
     public ICollection<Job> Jobs { get; set; }

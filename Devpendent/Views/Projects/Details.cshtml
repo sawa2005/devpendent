@@ -10,7 +10,7 @@
     <img src="/media/users/@Html.DisplayFor(model => model.User.Image)" class="project-pfp"/>
     <div>
         <h5>@Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)</h5>
-        <p>@Html.DisplayFor(model => model.User.UserName)</p>
+        <p>@@@Html.DisplayFor(model => model.User.UserName)</p>
     </div>
 </div>
 
@@ -59,7 +59,7 @@
             <div>
                 <div>
                     <h4>@Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)</h4>
-                    <p>@Html.DisplayFor(model => model.User.UserName)</p>
+                    <p>@@@Html.DisplayFor(model => model.User.UserName)</p>
                 </div>
                 <p>Implement user specialty</p>
                 <a class="btn btn-clear" asp-controller="Users" asp-action="Profile" asp-route-userName="@Model.User.UserName">View profile</a>

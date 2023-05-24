@@ -47,6 +47,10 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
 
         public string Description { get; set; }
 
+        public string ContactText { get; set; }
+
+        public string Specialties { get; set; }
+
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -74,6 +78,10 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
 
             public string Description { get; set; }
 
+            public string ContactText { get; set; }
+
+            public string Specialties { get; set; }
+
             [FileExtension]
             public IFormFile ImageUpload { get; set; }
         }
@@ -89,6 +97,8 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             var description = user.Description;
             var registerDate = user.RegisterDate;
             var image = user.Image;
+            var contactText = user.ContactText;
+            var specialties = user.Specialties;
 
             Email = email;
             RegisterDate = registerDate;
@@ -98,6 +108,8 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             LastName = lastName;
             Location = location;
             Description = description;
+            ContactText = contactText;
+            Specialties = specialties;
 
             Input = new InputModel
             {
@@ -106,7 +118,9 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
                 FirstName = firstName,
                 LastName = lastName,
                 Location = location,
-                Description = description
+                Description = description,
+                ContactText = contactText,
+                Specialties = specialties
             };
         }
 
@@ -198,6 +212,28 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
                 if (!setDescriptionResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set description.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.ContactText != user.ContactText)
+            {
+                user.ContactText = Input.ContactText;
+                var setContactTextResult = await _userManager.UpdateAsync(user);
+                if (!setContactTextResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set contact text.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.Specialties != user.Specialties)
+            {
+                user.Specialties = Input.Specialties;
+                var setSpecialtiesResult = await _userManager.UpdateAsync(user);
+                if (!setSpecialtiesResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set contact text.";
                     return RedirectToPage();
                 }
             }
