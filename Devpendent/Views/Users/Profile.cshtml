@@ -120,30 +120,42 @@
     <a asp-controller="Users" asp-action="Projects" asp-route-userName="@Model.UserName" class="d-block my-3 text-center">Browse all @@@Model.UserName's projects</a>
 </div>
 
-<div class="my-5">
+<div class="mt-5 jobs-wrap">
     <h3>Previous work experience</h3>
-    <div>
+    @if (Model.Jobs.Count < 1)
+    {
+        <p>Nothing here yet.</p>
+    }
+
+    else
+    {
         @foreach (var item in Model.Jobs)
         {
-            <div>
+            <div class="job">
                 <h4>@item.Title</h4>
-                <h5>@item.StartDate - @item.EndDate</h5>
+                <h6>@item.StartDate.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-GB")) - @item.EndDate.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-GB"))</h6>
                 <p>@item.Description</p>
             </div>
         }
-    </div>
+    }
 </div>
 
-<div>
+<div class="mt-4 educations-wrap">
     <h3>Education</h3>
-    <div>
+    @if (Model.Educations.Count < 1)
+    {
+        <p>Nothing here yet.</p>
+    }
+
+    else
+    {
         @foreach (var item in Model.Educations)
         {
-            <div>
+            <div class="education">
                 <h4>@item.Title - @item.UniversityName</h4>
-                <h5>Graduated in @item.GraduationYear</h5>
+                <h6>Graduated in @item.GraduationYear</h6>
             </div>
         }
-    </div>
+    }
 </div>
 

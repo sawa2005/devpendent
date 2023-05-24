@@ -13,7 +13,7 @@
         <form id="profile-form" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="user-main-wrap mb-5">
-                <div>
+                <div class="user-manage-wrap">
                     <div class="user-profile-wrap mt-4 mb-5">
                         <div>
                             <img id="imgpreview" class="mb-3" src="/media/users/@Model.Image" />
@@ -105,6 +105,44 @@
             </div>
             <input id="update-profile-button" type="submit" value="Save profile changes" class="btn btn-lg" />
         </form>
+        <div class="mt-5 jobs-wrap">
+            <h3>Previous work experience</h3>
+            @if (Model.Jobs.Count < 1)
+            {
+                <p>Nothing here yet.</p>
+            }
+            
+            else {
+                @foreach (var item in Model.Jobs)
+                {
+                    <div class="job">
+                        <h4>@item.Title</h4>
+                        <h6>@item.StartDate.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-GB")) - @item.EndDate.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-GB"))</h6>
+                        <p>@item.Description</p>
+                    </div>
+                }
+            }
+            <a class="btn btn-clear" asp-controller="Jobs" asp-action="Index">Edit</a>
+        </div>
+        <div class="mt-4 educations-wrap">
+            <h3>Education</h3>
+            @if (Model.Educations.Count < 1)
+            {
+                <p>Nothing here yet.</p>
+            }
+
+            else
+            {
+                @foreach (var item in Model.Educations)
+                {
+                    <div class="education">
+                        <h4>@item.Title - @item.UniversityName</h4>
+                        <h6>Graduated in @item.GraduationYear</h6>
+                    </div>
+                }
+            }
+            <a class="btn btn-clear" asp-controller="Educations" asp-action="Index">Edit</a>
+        </div>
     </div>
 </div>
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Devpendent.Data;
 using Devpendent.Models;
+using System.Security.Claims;
 
 namespace Devpendent.Controllers
 {
@@ -48,7 +49,6 @@ namespace Devpendent.Controllers
         // GET: Educations/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -61,11 +61,17 @@ namespace Devpendent.Controllers
         {
             if (ModelState.IsValid)
             {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+                var userId = claims.Value;
+                education.UserId = userId;
+
                 _context.Add(education);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", education.UserId);
+            
             return View(education);
         }
 

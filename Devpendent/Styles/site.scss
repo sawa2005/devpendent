@@ -34,6 +34,12 @@ h5, label, .nav-pills .nav-item {
     font-size: 0.938rem;
 }
 
+h6 {
+    font-family: nimbus-sans, sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
 p, input, textarea {
     font-family: "nimbus-sans", sans-serif;
     font-weight: 400;
@@ -698,6 +704,18 @@ main {
     min-height: 200px;
 }
 
+.education, .job {
+    margin-bottom: 15px;
+
+    h4 {
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
 @media (hover: hover) {
     .btn {
         transition: 0.2s ease;
@@ -781,6 +799,16 @@ main {
 
         .shortinfo {
             max-width: none;
+            width: 100%;
+        }
+    }
+
+    .user-manage-wrap .user-profile-wrap {
+        flex-direction: column;
+
+        img {
+            max-width: none;
+            max-height: none;
             width: 100%;
         }
     }

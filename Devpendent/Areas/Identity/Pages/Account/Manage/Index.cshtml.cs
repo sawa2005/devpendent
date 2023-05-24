@@ -7,7 +7,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Devpendent.Areas.Identity.Data;
+using Devpendent.Data;
 using Devpendent.Data.Validation;
+using Devpendent.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,15 +19,18 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
+        private readonly DevpendentContext _context;
         private readonly UserManager<DevpendentUser> _userManager;
         private readonly SignInManager<DevpendentUser> _signInManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public IndexModel(
+            DevpendentContext context,
             UserManager<DevpendentUser> userManager,
             SignInManager<DevpendentUser> signInManager,
             IWebHostEnvironment webHostEnvironment)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _webHostEnvironment = webHostEnvironment;
@@ -50,6 +55,10 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
         public string ContactText { get; set; }
 
         public string Specialties { get; set; }
+
+        public ICollection<Job> Jobs { get; set; }
+
+        public ICollection<Education> Educations { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -100,6 +109,12 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             var contactText = user.ContactText;
             var specialties = user.Specialties;
 
+            var jobs = _context.Jobs.Where(j => j.UserId == user.Id).ToList();
+            var educations = _context.Educations.Where(e => e.UserId == user.Id).ToList();
+
+            user.Jobs = jobs;
+            user.Educations = educations;
+
             Email = email;
             RegisterDate = registerDate;
             Image = image;
@@ -110,6 +125,8 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             Description = description;
             ContactText = contactText;
             Specialties = specialties;
+            Jobs = jobs;
+            Educations = educations;
 
             Input = new InputModel
             {
@@ -127,6 +144,7 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
