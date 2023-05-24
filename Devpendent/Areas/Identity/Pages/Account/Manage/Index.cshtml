@@ -1,60 +1,98 @@
 ﻿@page
+@using System.Globalization;
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = " Edit Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
-    <div class="col-md-6">
+    <div>
         <form id="profile-form" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-group">
-                <label>Profile Picture</label>
-                <img src="/media/users/@Model.Image" width="200" class="pt-2" alt="Image Preview" />
+            <div class="user-main-wrap mb-5">
+                <div>
+                    <div class="user-profile-wrap mt-4 mb-5">
+                        <div>
+                            <img id="imgpreview" class="mb-3" src="/media/users/@Model.Image" />
+                            <div class="form-group">
+                                <label asp-for="Input.ImageUpload" class="control-label">Edit profile picture</label>
+                                <input asp-for="Input.ImageUpload" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="user-profile-text">
+                            <div class="d-flex">
+                                <div class="form-floating">
+                                    <input asp-for="Input.FirstName" class="form-control" placeholder="Please choose your first name." />
+                                    <label asp-for="Input.FirstName" class="form-label"></label>
+                                </div>
+                                <div class="form-floating">
+                                    <input asp-for="Input.LastName" class="form-control" placeholder="Please choose your last name." />
+                                    <label asp-for="Input.LastName" class="form-label"></label>
+                                </div>
+                            </div>
+                            <div class="username-input-wrap d-flex align-items-center">
+                                <span class="prefix">@@</span>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.Username" class="form-control" placeholder="Please choose your username." />
+                                    <label asp-for="Input.Username" class="form-label"></label>
+                                </div>
+                            </div>
+                            <p class="my-3">Implement user specialties</p>
+                            <div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14.523" height="17.461" viewBox="0 0 14.523 17.461">
+                                        <g id="Icon_feather-map-pin" data-name="Icon feather-map-pin" transform="translate(0.65 0.65)">
+                                            <path d="M17.723,8.111c0,5.142-6.611,9.55-6.611,9.55S4.5,13.253,4.5,8.111a6.611,6.611,0,0,1,13.223,0Z" transform="translate(-4.5 -1.5)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                                            <path d="M17.908,12.7a2.2,2.2,0,1,1-2.2-2.2,2.2,2.2,0,0,1,2.2,2.2Z" transform="translate(-9.092 -6.092)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                                        </g>
+                                    </svg>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Input.Location" class="form-control" placeholder="Please choose your location." />
+                                        <label asp-for="Input.Location" class="form-label"></label>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14.523" height="15.992" viewBox="0 0 14.523 15.992">
+                                        <g data-name="Icon feather-calendar" transform="translate(0.65 0.65)">
+                                            <path d="M5.969,6H16.253a1.469,1.469,0,0,1,1.469,1.469V17.753a1.469,1.469,0,0,1-1.469,1.469H5.969A1.469,1.469,0,0,1,4.5,17.753V7.469A1.469,1.469,0,0,1,5.969,6Z" transform="translate(-4.5 -4.531)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                                            <path d="M24,3V5.938" transform="translate(-14.451 -3)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                                            <path d="M12,3V5.938" transform="translate(-8.327 -3)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                                            <path d="M4.5,15H17.723" transform="translate(-4.5 -9.123)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />
+                                        </g>
+                                    </svg>
+                                    <p>
+                                        Member since @Model.RegisterDate.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-GB"))
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Developer biography</h3>
+                        <div class="form-group">
+                            <label asp-for="Input.Description" class="control-label"></label>
+                            <textarea asp-for="Input.Description" class="form-control"></textarea>
+                            <span asp-validation-for="Input.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.ImageUpload" class="control-label"></label>
-                <input asp-for="Input.ImageUpload" class="form-control" />
-                <img src="" id="imgpreview" class="pt-2" alt="Image Preview" />
+            <div class="form-group my-5">
+                <h3 class="mb-3">Contact information</h3>
+                <div class="form-floating mb-4">
+                    <input asp-for="Email" class="form-control" placeholder="Please choose your email." disabled />
+                    <label asp-for="Email" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
+                    <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Email" class="form-control" placeholder="Please choose your email." disabled />
-                <label asp-for="Email" class="form-label"></label>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="RegisterDate" class="form-control" placeholder="Please choose your email." disabled />
-                <label asp-for="RegisterDate" class="form-label"></label>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Username" class="form-control" placeholder="Please choose your username." />
-                <label asp-for="Input.Username" class="form-label"></label>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.FirstName" class="form-control" placeholder="Please choose your first name." />
-                <label asp-for="Input.FirstName" class="form-label"></label>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.LastName" class="form-control" placeholder="Please choose your last name." />
-                <label asp-for="Input.LastName" class="form-label"></label>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Location" class="form-control" placeholder="Please choose your location." />
-                <label asp-for="Input.Location" class="form-label"></label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Description" class="control-label"></label>
-                <textarea asp-for="Input.Description" class="form-control"></textarea>
-                <span asp-validation-for="Input.Description" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <input id="update-profile-button" type="submit" value="Save" class="btn btn-primary" />
+            <input id="update-profile-button" type="submit" value="Save profile changes" class="btn btn-lg" />
         </form>
     </div>
 </div>

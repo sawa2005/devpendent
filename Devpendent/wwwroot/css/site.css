@@ -1,4 +1,4 @@
-h1 {
+h1, #Input_FirstName, #Input_LastName {
   font-family: "paralucent", sans-serif;
   font-weight: 300;
   font-style: normal;
@@ -27,14 +27,14 @@ h4 {
   font-size: 1.25rem;
 }
 
-h5 {
+h5, label, .nav-pills .nav-item {
   font-family: "paralucent", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 0.938rem;
 }
 
-p {
+p, input {
   font-family: "nimbus-sans", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -133,11 +133,15 @@ main {
   font-size: 1.15rem;
   color: #000;
 }
-.default-main .btn {
-  color: #317E53;
-  border: 2px solid #317E53;
-  border-radius: 15px;
-  padding: 8px 15px !important;
+
+.btn {
+  background-color: #317E53;
+  color: white;
+  border-radius: 13px;
+  font-family: paralucent, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  padding: 5px 15px;
 }
 
 .home-logo {
@@ -209,15 +213,6 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-.category .btn {
-  background-color: #317E53;
-  color: white;
-  border-radius: 13px;
-  font-family: paralucent, sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  padding: 5px 15px;
 }
 
 .category-link {
@@ -458,6 +453,10 @@ main {
   flex-direction: column;
   justify-content: space-between;
 }
+.user-profile-text label {
+  padding-left: 0;
+  border: none;
+}
 
 .footer {
   position: initial !important;
@@ -541,6 +540,87 @@ main {
   border-radius: 10px !important;
 }
 
+#Input_FirstName, #Input_LastName, #Input_Location {
+  height: initial;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.form-floating {
+  transition: all 0.2s ease;
+}
+
+.form-floating:hover {
+  background-color: #CECECE;
+  border-radius: 10px;
+}
+
+.username-input-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.username-input-wrap span {
+  position: absolute;
+  height: min-content;
+}
+.username-input-wrap #Input_Username {
+  height: initial;
+  border: none;
+  padding-left: 17px;
+  padding-right: 0;
+  background: none;
+}
+
+.form-control {
+  border: 1px solid #000;
+  border-radius: 15px;
+}
+
+.form-control::file-selector-button {
+  color: #fff;
+  background-color: #000;
+}
+
+#logout {
+  background: none;
+}
+
+#cke_Input_Description {
+  border: 1px solid #000;
+  border-radius: 15px;
+}
+#cke_Input_Description .cke_inner, #cke_Input_Description .cke_top, #cke_Input_Description .cke_bottom {
+  background: none;
+}
+
+.nav-pills {
+  border: 2px solid #CECECE;
+  border-radius: 18px;
+}
+.nav-pills .nav-link {
+  color: #000;
+  border-radius: 0;
+}
+.nav-pills .nav-link.active {
+  background-color: #317E53 !important;
+}
+.nav-pills .nav-item:first-child a {
+  border-radius: 15px 15px 0px 0px;
+}
+.nav-pills .nav-item:last-child a {
+  border-radius: 0px 0px 15px 15px;
+}
+
+.btn-danger {
+  background-color: #bb2d3b;
+  border: 0;
+}
+
 @media (hover: hover) {
   .btn {
     transition: 0.2s ease;
@@ -554,6 +634,7 @@ main {
   }
   .btn:hover {
     background-color: #45BC79;
+    color: #fff;
   }
   .btn-clear:hover {
     background-color: #CAF1F6;
@@ -569,6 +650,15 @@ main {
   }
   #logout:hover {
     background-color: initial;
+  }
+  .form-control:hover::file-selector-button {
+    background-color: #317E53 !important;
+  }
+  .nav-link:hover {
+    background-color: #CECECE;
+  }
+  .btn-danger:hover {
+    background-color: #dc3545;
   }
 }
 @media (max-width: 1000px) {

@@ -37,6 +37,16 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
 
         public string Image { get; set; }
 
+        public string Username { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Location { get; set; }
+
+        public string Description { get; set; }
+
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -83,6 +93,11 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             Email = email;
             RegisterDate = registerDate;
             Image = image;
+            Username = userName;
+            FirstName = firstName;
+            LastName = lastName;
+            Location = location;
+            Description = description;
 
             Input = new InputModel
             {
