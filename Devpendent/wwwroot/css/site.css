@@ -465,6 +465,9 @@ main {
   padding-left: 0;
   border: none;
 }
+.user-profile-text .d-flex p {
+  margin-top: 3px;
+}
 
 .footer {
   position: initial !important;
