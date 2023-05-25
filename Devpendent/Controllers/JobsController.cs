@@ -8,22 +8,31 @@ using Microsoft.EntityFrameworkCore;
 using Devpendent.Data;
 using Devpendent.Models;
 using System.Security.Claims;
+using Devpendent.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace Devpendent.Controllers
 {
     public class JobsController : Controller
     {
         private readonly DevpendentContext _context;
+        private readonly UserManager<DevpendentUser> _userManager;
 
-        public JobsController(DevpendentContext context)
+        public JobsController(DevpendentContext context, UserManager<DevpendentUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Jobs
         public async Task<IActionResult> Index()
         {
-            var devpendentContext = _context.Jobs.Include(j => j.User);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var userId = claims.Value;
+
+            var devpendentContext = _context.Jobs.Where(j => j.UserId == userId);
             return View(await devpendentContext.ToListAsync());
         }
 

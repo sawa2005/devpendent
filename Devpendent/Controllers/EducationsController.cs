@@ -8,22 +8,31 @@ using Microsoft.EntityFrameworkCore;
 using Devpendent.Data;
 using Devpendent.Models;
 using System.Security.Claims;
+using Devpendent.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace Devpendent.Controllers
 {
     public class EducationsController : Controller
     {
         private readonly DevpendentContext _context;
+        private readonly UserManager<DevpendentUser> _userManager;
 
-        public EducationsController(DevpendentContext context)
+        public EducationsController(DevpendentContext context, UserManager<DevpendentUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Educations
         public async Task<IActionResult> Index()
         {
-            var devpendentContext = _context.Educations.Include(e => e.User);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var userId = claims.Value;
+
+            var devpendentContext = _context.Educations.Where(j => j.UserId == userId);
             return View(await devpendentContext.ToListAsync());
         }
 

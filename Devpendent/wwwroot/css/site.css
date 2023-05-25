@@ -40,7 +40,7 @@ h6 {
   font-style: normal;
 }
 
-p, input, textarea {
+p, input, textarea, .alert {
   font-family: "nimbus-sans", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -58,6 +58,10 @@ a {
 body {
   color: #000;
   overflow-x: hidden;
+}
+
+.alert {
+  border-radius: 15px;
 }
 
 .container, .container-fluid, .row > * {
@@ -431,6 +435,12 @@ main {
   color: #000;
 }
 
+.default-main #register {
+  color: #317E53;
+  border: 2px solid #317E53;
+  background: none;
+}
+
 .user-main-wrap {
   display: flex;
   justify-content: space-between;
@@ -702,6 +712,11 @@ main {
   }
   .btn-clear:hover {
     color: #000;
+  }
+  .default-main #register:hover {
+    color: #fff;
+    border: 2px solid #45BC79;
+    background: #45BC79;
   }
 }
 @media (max-width: 1000px) {
