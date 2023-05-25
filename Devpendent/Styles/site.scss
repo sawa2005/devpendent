@@ -730,6 +730,15 @@ main {
     }
 }
 
+.form-check-input {
+    margin-top: 0;
+}
+
+.form-check-input:checked {
+    background-color: #317E53;
+    border-color: #317E53;
+}
+
 @media (hover: hover) {
     .btn {
         transition: 0.2s ease;

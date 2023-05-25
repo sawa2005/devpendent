@@ -19,11 +19,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Devpendent.Data;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Devpendent.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private readonly DevpendentContext _context;
         private readonly SignInManager<DevpendentUser> _signInManager;
         private readonly UserManager<DevpendentUser> _userManager;
         private readonly IUserStore<DevpendentUser> _userStore;
@@ -32,12 +35,14 @@ namespace Devpendent.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
+            DevpendentContext context,
             UserManager<DevpendentUser> userManager,
             IUserStore<DevpendentUser> userStore,
             SignInManager<DevpendentUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
+            _context = context;
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
@@ -80,6 +85,9 @@ namespace Devpendent.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            [Required]
+            public string Username { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -111,11 +119,17 @@ namespace Devpendent.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            if (_context.Users.Any(i => i.UserName == Input.Username))
+            {
+                ModelState.AddModelError("Input.Username", "This username is already in use.");
+            }
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                
+                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
