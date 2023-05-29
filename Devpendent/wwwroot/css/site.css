@@ -80,6 +80,10 @@ body {
   margin-top: 120px;
 }
 
+.rounded {
+  border-radius: 18px !important;
+}
+
 .border-footer {
   border-top: 2px solid #CECECE;
 }
@@ -133,7 +137,7 @@ main {
   width: max-content;
 }
 .default-main .navbar-nav {
-  flex-basis: 763px;
+  flex-basis: 920px;
   justify-content: end;
 }
 .default-main .nav-link {
@@ -256,8 +260,6 @@ main {
   z-index: 99;
 }
 .project .btn {
-  background-color: #317E53;
-  color: white;
   border-radius: 13px;
   font-family: paralucent, sans-serif;
   font-weight: 500;
@@ -375,6 +377,14 @@ main {
 
 .project-main-wrap {
   max-width: 825px;
+}
+
+.project-buttons {
+  padding: 0px 15px;
+  margin: 15px 0px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .budget-wrap {
@@ -626,11 +636,11 @@ main {
   background: none;
 }
 
-#cke_Input_Description {
-  border: 1px solid #000;
+.cke {
+  border: 1px solid #000 !important;
   border-radius: 15px;
 }
-#cke_Input_Description .cke_inner, #cke_Input_Description .cke_top, #cke_Input_Description .cke_bottom {
+.cke .cke_inner, .cke .cke_top, .cke .cke_bottom {
   background: none;
 }
 
@@ -654,6 +664,7 @@ main {
 
 .btn-danger {
   background-color: #bb2d3b;
+  color: white !important;
   border: 0;
 }
 

@@ -129,7 +129,7 @@ namespace Devpendent.Controllers
         // GET: Projects/Manage
         public async Task<IActionResult> Manage()
         {
-            var dataContext = _context.Projects.Include(p => p.Category);
+            var dataContext = _context.Projects.Include(p => p.Category).Include(p => p.User);
             return View(await dataContext.ToListAsync());
         }
 
