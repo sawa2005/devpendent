@@ -34,7 +34,7 @@
                             </li>
                             <partial name="_LoginPartial" />
                             <li class="search-wrap">
-                                @using (Html.BeginForm("Projects", "Search", FormMethod.Post, new { id = "search-form" }))
+                                @using (Html.BeginForm("Index", "Projects", FormMethod.Get, new { id = "search-form" }))
                                 {
                                     @Html.TextBox("SearchString", "", new { placeholder = "What project do you need done?" })
                                     <button type="submit">

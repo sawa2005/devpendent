@@ -5,12 +5,18 @@
     ViewData["Title"] = "Browse " + ViewBag.CategoryName + " Projects";
 }
 
-@if (ViewBag.CategorySlug != null)
+@if (ViewBag.SearchString != null)
+{
+    <h1>Results for @ViewBag.SearchString</h1>
+}
+
+else if (ViewBag.CategorySlug != null)
 {
     <h1>@ViewBag.CategoryName Projects</h1>
 }
 
-else {
+else 
+{
     <h1>All projects</h1>
 }
 

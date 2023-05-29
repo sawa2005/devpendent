@@ -57,6 +57,7 @@ namespace Devpendent.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 projects = projects.Where(p => p.Title.Contains(searchString));
+                ViewBag.SearchString = searchString;
             }
 
             if (categorySlug == "")
