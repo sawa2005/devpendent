@@ -14,6 +14,14 @@ namespace Devpendent.Infrastructure.Components
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync() => View(await _context.Categories.ToListAsync());
+        public async Task<IViewComponentResult> InvokeAsync(string view)
+        {
+            if (view == "Links")
+            {
+                return View("Links", await _context.Categories.ToListAsync());
+            }
+
+            return View(await _context.Categories.ToListAsync());
+        }
     }
 }

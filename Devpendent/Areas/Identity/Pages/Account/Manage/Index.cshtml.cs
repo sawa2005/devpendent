@@ -279,7 +279,8 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             if (Input.ImageUpload != null)
             {
                 string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/users");
-                string imageName = user.UserName + "_" + Input.ImageUpload.FileName;
+                var extension = Path.GetExtension(Input.ImageUpload.FileName);
+                string imageName = user.UserName + extension;
                 string filePath = Path.Combine(uploadsDir, imageName);
 
                 if (user.Image != null)

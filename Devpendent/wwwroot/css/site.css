@@ -307,6 +307,8 @@ main {
   width: 33px;
   height: 33px;
   border-radius: 8px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .project-thumb-wrap {
@@ -402,6 +404,8 @@ main {
   max-width: 150px;
   max-height: 150px;
   border-radius: 15px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 .project-dev-wrap > div {
   display: flex;
@@ -502,6 +506,8 @@ main {
   max-width: 240px;
   max-height: 240px;
   border-radius: 15px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 .user-main-wrap .shortinfo {
   max-width: 400px;
@@ -782,10 +788,12 @@ main {
     text-decoration: underline;
   }
 }
-@media (max-width: 1000px) {
+@media (max-width: 1175px) {
   .default-logo {
     content: url("/media/logo_mobile_black.png");
   }
+}
+@media (max-width: 1000px) {
   .home-logo {
     content: url("/media/logo_mobile_white.png");
   }
@@ -815,16 +823,7 @@ main {
     width: 100%;
   }
 }
-@media (max-width: 767px) {
-  .user-profile-wrap {
-    flex-direction: column;
-  }
-  .user-profile-wrap img {
-    max-width: none;
-    max-height: none;
-  }
-}
-@media (min-width: 576px) and (max-width: 800px) {
+@media (min-width: 576px) and (max-width: 1000px) {
   .container-fluid {
     position: relative;
   }
@@ -838,6 +837,18 @@ main {
   .search-wrap {
     margin: auto;
     flex-basis: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .user-profile-wrap {
+    flex-direction: column;
+  }
+  .user-profile-wrap img {
+    max-width: none;
+    max-height: none;
+  }
+  .navbar-nav .nav-item:nth-child(1) {
+    margin-left: 50px;
   }
 }
 @media (max-width: 575px) {
