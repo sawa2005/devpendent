@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Devpendent.Areas.Identity.Data;
@@ -57,6 +58,8 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
 
         public string Specialties { get; set; }
 
+        public string Website { get; set; }
+
         public ICollection<Job> Jobs { get; set; }
 
         public ICollection<Education> Educations { get; set; }
@@ -92,6 +95,8 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
 
             public string Specialties { get; set; }
 
+            public string Website { get; set; }
+
             [FileExtension]
             public IFormFile ImageUpload { get; set; }
         }
@@ -109,6 +114,7 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             var image = user.Image;
             var contactText = user.ContactText;
             var specialties = user.Specialties;
+            var website = user.Website;
 
             var jobs = _context.Jobs.Where(j => j.UserId == user.Id).ToList();
             var educations = _context.Educations.Where(e => e.UserId == user.Id).ToList();
@@ -128,6 +134,7 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
             Specialties = specialties;
             Jobs = jobs;
             Educations = educations;
+            Website = website;
 
             Input = new InputModel
             {
@@ -138,7 +145,8 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
                 Location = location,
                 Description = description,
                 ContactText = contactText,
-                Specialties = specialties
+                Specialties = specialties,
+                Website = website
             };
         }
 
@@ -252,7 +260,18 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
                 var setSpecialtiesResult = await _userManager.UpdateAsync(user);
                 if (!setSpecialtiesResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set contact text.";
+                    StatusMessage = "Unexpected error when trying to set specialties.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.Website != user.Website)
+            {
+                user.Website = Input.Website;
+                var setWebsiteResult = await _userManager.UpdateAsync(user);
+                if (!setWebsiteResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set website.";
                     return RedirectToPage();
                 }
             }

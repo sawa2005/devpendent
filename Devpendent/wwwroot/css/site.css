@@ -607,7 +607,7 @@ main {
   border-radius: 10px !important;
 }
 
-#Input_FirstName, #Input_LastName, #Input_Location {
+#Input_FirstName, #Input_LastName, #Input_Location, #Input_Website {
   height: initial;
   border: none;
   padding-left: 0;
