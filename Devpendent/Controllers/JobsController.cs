@@ -10,6 +10,8 @@ using Devpendent.Models;
 using System.Security.Claims;
 using Devpendent.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using SmartBreadcrumbs.Nodes;
+using SmartBreadcrumbs.Attributes;
 
 namespace Devpendent.Controllers
 {
@@ -31,6 +33,11 @@ namespace Devpendent.Controllers
             var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var userId = claims.Value;
+
+            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
+            var jobsNode = new MvcBreadcrumbNode("Index", "Jobs", "ViewData.Title") { Parent = accountNode };
+
+            ViewData["BreadcrumbNode"] = jobsNode;
 
             var devpendentContext = _context.Jobs.Where(j => j.UserId == userId);
             return View(await devpendentContext.ToListAsync());
@@ -58,6 +65,12 @@ namespace Devpendent.Controllers
         // GET: Jobs/Create
         public IActionResult Create()
         {
+            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
+            var jobsNode = new MvcBreadcrumbNode("Index", "Jobs", "Manage your jobs") { Parent = accountNode };
+            var jobNode = new MvcBreadcrumbNode("Index", "Jobs", "Create job") { Parent = jobsNode };
+
+            ViewData["BreadcrumbNode"] = jobNode;
+
             return View();
         }
 
@@ -96,6 +109,13 @@ namespace Devpendent.Controllers
             {
                 return NotFound();
             }
+
+            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
+            var jobsNode = new MvcBreadcrumbNode("Index", "Jobs", "Manage your jobs") { Parent = accountNode };
+            var jobNode = new MvcBreadcrumbNode("Index", "Jobs", "Edit " + job.Title) { Parent = jobsNode };
+
+            ViewData["BreadcrumbNode"] = jobNode;
+
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", job.UserId);
             return View(job);
         }

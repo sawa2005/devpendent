@@ -12,12 +12,11 @@ using Microsoft.AspNetCore.Identity;
 using Devpendent.Areas.Identity.Data;
 using System.Drawing.Printing;
 using Microsoft.Data.SqlClient;
-using Devpendent.Filters;
 using System.Security.Claims;
+using SmartBreadcrumbs.Nodes;
 
 namespace Devpendent.Controllers
 {
-    [BreadcrumbActionFilter]
     public class UsersController : Controller
     {
         private readonly DevpendentContext _context;
@@ -50,6 +49,10 @@ namespace Devpendent.Controllers
             {
                 return NotFound();
             }
+
+            var userNode = new MvcBreadcrumbNode("Profile", "Users", "ViewData.Title");
+
+            ViewData["BreadcrumbNode"] = userNode;
 
             return View(user);
         }
@@ -100,6 +103,16 @@ namespace Devpendent.Controllers
                 }
 
                 ViewBag.ProjectCount = projects.Count();
+
+                var userNode = new MvcBreadcrumbNode("Profile", "Users", "@" + userName + "'s Profile") { RouteValues = new { userName } };
+
+                var projectsNode = new MvcBreadcrumbNode("Index", "Users", "Projects")
+                {
+                    RouteValues = new { userName },
+                    Parent = userNode
+                };
+
+                ViewData["BreadcrumbNode"] = projectsNode;
 
                 return View(await projects.Include(p => p.User).Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
             }

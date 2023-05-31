@@ -1,11 +1,11 @@
-﻿using Devpendent.Filters;
-using Devpendent.Models;
+﻿using Devpendent.Models;
 using Microsoft.AspNetCore.Mvc;
+using SmartBreadcrumbs.Attributes;
 using System.Diagnostics;
 
 namespace Devpendent.Controllers
 {
-    [BreadcrumbActionFilter]
+    [DefaultBreadcrumb("H")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -20,6 +20,7 @@ namespace Devpendent.Controllers
             return View();
         }
 
+        [Breadcrumb("ViewData.Title")]
         public IActionResult Privacy()
         {
             return View();

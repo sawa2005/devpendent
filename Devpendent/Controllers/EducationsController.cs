@@ -10,6 +10,7 @@ using Devpendent.Models;
 using System.Security.Claims;
 using Devpendent.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using SmartBreadcrumbs.Nodes;
 
 namespace Devpendent.Controllers
 {
@@ -31,6 +32,11 @@ namespace Devpendent.Controllers
             var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var userId = claims.Value;
+
+            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
+            var educationsNode = new MvcBreadcrumbNode("Index", "Educations", "ViewData.Title") { Parent = accountNode };
+
+            ViewData["BreadcrumbNode"] = educationsNode;
 
             var devpendentContext = _context.Educations.Where(j => j.UserId == userId);
             return View(await devpendentContext.ToListAsync());
@@ -58,6 +64,12 @@ namespace Devpendent.Controllers
         // GET: Educations/Create
         public IActionResult Create()
         {
+            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
+            var educationsNode = new MvcBreadcrumbNode("Index", "Educations", "Manage your educations") { Parent = accountNode };
+            var educationNode = new MvcBreadcrumbNode("Create", "Educations", "Create education") { Parent = educationsNode };
+
+            ViewData["BreadcrumbNode"] = educationNode;
+
             return View();
         }
 
@@ -97,6 +109,13 @@ namespace Devpendent.Controllers
             {
                 return NotFound();
             }
+
+            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
+            var educationsNode = new MvcBreadcrumbNode("Index", "Educations", "Manage your educations") { Parent = accountNode };
+            var educationNode = new MvcBreadcrumbNode("Edit", "Educations", "Edit " + education.Title) { Parent = educationsNode };
+
+            ViewData["BreadcrumbNode"] = educationNode;
+
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", education.UserId);
             return View(education);
         }

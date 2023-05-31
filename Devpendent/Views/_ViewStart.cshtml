@@ -1,11 +1,12 @@
 ﻿@{
     string controller = ViewContext.RouteData.Values["controller"].ToString();
     string action = ViewContext.RouteData.Values["action"].ToString();
-    
+
     if (controller.Contains("Home") && action.Contains("Index"))
     {
         Layout = "_HomeLayout";
     }
+
     else
     {
         Layout = "_Layout";

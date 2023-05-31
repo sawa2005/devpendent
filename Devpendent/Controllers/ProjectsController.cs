@@ -12,12 +12,14 @@ using Microsoft.AspNetCore.Identity;
 using Devpendent.Areas.Identity.Data;
 using System.Drawing.Printing;
 using Microsoft.Data.SqlClient;
-using Devpendent.Filters;
 using System.Security.Claims;
+using SmartBreadcrumbs.Attributes;
+using SmartBreadcrumbs.Nodes;
+using System.Runtime.InteropServices;
 
 namespace Devpendent.Controllers
 {
-    [BreadcrumbActionFilter]
+    [Breadcrumb("Projects")]
     public class ProjectsController : Controller
     {
         private readonly DevpendentContext _context;
@@ -102,6 +104,11 @@ namespace Devpendent.Controllers
                     break;
             }
 
+            var projectsNode = new MvcBreadcrumbNode("Index", "Projects", "Projects");
+            var categoryNode = new MvcRouteBreadcrumbNode("categorySlug", category.Name) { Parent = projectsNode };
+
+            ViewData["BreadcrumbNode"] = categoryNode;
+
             ViewBag.ProjectCount = projectsByCategory.Count();
 
             return View(await projectsByCategory.Include(p => p.User).Skip((p - 1) * pageSize).Take(pageSize).ToListAsync());
@@ -127,6 +134,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Projects/Manage
+        [Breadcrumb(Title = "My projects")]
         public async Task<IActionResult> Manage()
         {
             var dataContext = _context.Projects.Include(p => p.Category).Include(p => p.User);
@@ -151,10 +159,21 @@ namespace Devpendent.Controllers
                 return NotFound();
             }
 
+            var projectsNode = new MvcBreadcrumbNode("Index", "Projects", "Projects");
+            var categoryNode = new MvcBreadcrumbNode("Index", "Projects", project.Category.Name) 
+            { 
+                RouteValues = new { categorySlug = project.Category.Slug },
+                Parent = projectsNode 
+            };
+            var projectNode = new MvcBreadcrumbNode("Details", "Projects", project.Title) { Parent = categoryNode };
+
+            ViewData["BreadcrumbNode"] = projectNode;
+
             return View(project);
         }
 
         // GET: Projects/Create
+        [Breadcrumb(FromAction = "Manage", Title = "Create project")]
         public IActionResult Create()
         {
             ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
@@ -228,6 +247,12 @@ namespace Devpendent.Controllers
             {
                 return NotFound();
             }
+
+            var projectsNode = new MvcBreadcrumbNode("Index", "Projects", "Projects");
+            var myProjectsNode = new MvcBreadcrumbNode("Manage", "Projects", "My projects") { Parent = projectsNode };
+            var projectNode = new MvcBreadcrumbNode("Edit", "Projects", "Edit " + project.Title) { Parent = myProjectsNode };
+
+            ViewData["BreadcrumbNode"] = projectNode;
 
             ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", project.CategoryId);
 
