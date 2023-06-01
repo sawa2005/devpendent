@@ -26,6 +26,18 @@ namespace Devpendent.Controllers
             return View();
         }
 
+        [Breadcrumb("ViewData.Title")]
+        public IActionResult CodeOfConduct()
+        {
+            return View();
+        }
+
+        [Breadcrumb("ViewData.Title")]
+        public IActionResult Accessibility()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
