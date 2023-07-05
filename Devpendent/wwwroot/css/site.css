@@ -745,6 +745,12 @@ main {
   height: fit-content;
 }
 
+.category-btn-wrap {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
 @media (hover: hover) {
   .btn {
     transition: 0.2s ease;
@@ -859,6 +865,18 @@ main {
     max-width: none;
     max-height: none;
   }
+  .main-wrap {
+    flex-direction: column-reverse;
+    gap: 50px;
+  }
+  .main-wrap .instruction {
+    width: 100%;
+  }
+  .main-wrap .content-wrap {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) and (min-width: 576px) {
   .navbar-nav .nav-item:nth-child(1) {
     margin-left: 50px;
   }

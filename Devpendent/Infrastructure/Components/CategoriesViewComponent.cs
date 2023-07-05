@@ -21,6 +21,11 @@ namespace Devpendent.Infrastructure.Components
                 return View("Links", await _context.Categories.ToListAsync());
             }
 
+            if (view == "Buttons")
+            {
+                return View("Buttons", await _context.Categories.ToListAsync());
+            }
+
             return View("Default", await _context.Categories.ToListAsync());
         }
     }

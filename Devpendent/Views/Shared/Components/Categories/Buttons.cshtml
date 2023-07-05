@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Category>
+
+<div class="my-3">
+    <p class="mb-1">Categories</p>
+    <div class="category-btn-wrap">
+        @foreach (var item in Model)
+        {
+            <a asp-controller="Projects" asp-action="Index" asp-route-categorySlug="@item.Slug" class="btn btn-clear">@item.Name</a>
+        }
+    </div>
+</div>
