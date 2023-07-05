@@ -733,6 +733,18 @@ main {
   border-color: #317E53;
 }
 
+.main-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.main-wrap .content-wrap {
+  width: 50%;
+}
+.main-wrap .instruction {
+  width: 25%;
+  height: fit-content;
+}
+
 @media (hover: hover) {
   .btn {
     transition: 0.2s ease;

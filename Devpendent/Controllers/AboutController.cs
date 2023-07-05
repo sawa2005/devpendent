@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SmartBreadcrumbs.Attributes;
 
 namespace Devpendent.Controllers
 {
+    [Breadcrumb("About us")]
     public class AboutController : Controller
     {
         public IActionResult Index()
@@ -9,6 +11,7 @@ namespace Devpendent.Controllers
             return View();
         }
 
+        [Breadcrumb("ViewData.Title")]
         public IActionResult HowTo()
         {
             return View();

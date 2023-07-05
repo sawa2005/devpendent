@@ -797,6 +797,20 @@ main {
     border-color: #317E53;
 }
 
+.main-wrap {
+    display: flex;
+    justify-content: space-between;
+
+    .content-wrap {
+        width: 50%;
+    }
+
+    .instruction {
+        width: 25%;
+        height: fit-content;
+    }
+}
+
 @media (hover: hover) {
     .btn {
         transition: 0.2s ease;

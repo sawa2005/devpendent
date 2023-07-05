@@ -358,7 +358,7 @@ namespace Devpendent.Controllers
 
             if (project != null)
             {
-                if(!string.Equals(project.Image, "noimage.png"))
+                if(!string.Equals(project.Image, "noimage.png") && !string.IsNullOrEmpty(project.Image))
                 {
                     string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/projects");
                     string oldImagePath = Path.Combine(uploadsDir, project.Image);
