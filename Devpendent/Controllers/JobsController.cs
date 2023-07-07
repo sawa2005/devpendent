@@ -12,9 +12,11 @@ using Devpendent.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using SmartBreadcrumbs.Nodes;
 using SmartBreadcrumbs.Attributes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Devpendent.Controllers
 {
+    [Authorize]
     public class JobsController : Controller
     {
         private readonly DevpendentContext _context;

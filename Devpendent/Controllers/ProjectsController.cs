@@ -16,6 +16,7 @@ using System.Security.Claims;
 using SmartBreadcrumbs.Attributes;
 using SmartBreadcrumbs.Nodes;
 using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Devpendent.Controllers
 {
@@ -173,6 +174,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Projects/Create
+        [Authorize]
         [Breadcrumb(FromAction = "Manage", Title = "Create project")]
         public IActionResult Create()
         {
@@ -235,6 +237,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Projects == null)
@@ -326,6 +329,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Projects/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Projects == null)

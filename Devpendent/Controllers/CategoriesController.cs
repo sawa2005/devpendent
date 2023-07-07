@@ -9,9 +9,11 @@ using Devpendent.Data;
 using Devpendent.Models;
 using Microsoft.AspNetCore.Hosting;
 using SmartBreadcrumbs.Attributes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Devpendent.Controllers
 {
+    [Authorize]
     [Breadcrumb("Categories")]
     public class CategoriesController : Controller
     {
@@ -25,6 +27,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Categories
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Categories.ToListAsync());
