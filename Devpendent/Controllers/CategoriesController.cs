@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Devpendent.Data;
 using Devpendent.Models;
+using Microsoft.AspNetCore.Hosting;
+using SmartBreadcrumbs.Attributes;
 
 namespace Devpendent.Controllers
 {
+    [Breadcrumb("Categories")]
     public class CategoriesController : Controller
     {
         private readonly DevpendentContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CategoriesController(DevpendentContext context)
+        public CategoriesController(DevpendentContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Categories
@@ -25,12 +30,14 @@ namespace Devpendent.Controllers
             return View(await _context.Categories.ToListAsync());
         }
 
+        [Breadcrumb(Title = "Manage")]
         public async Task<IActionResult> Manage()
         {
             return View(await _context.Categories.ToListAsync());
         }
 
         // GET: Categories/Details/5
+        [Breadcrumb(FromAction = "Manage", Title = "Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -49,6 +56,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Categories/Create
+        [Breadcrumb(FromAction = "Manage", Title = "Create category")]
         public IActionResult Create()
         {
             return View();
@@ -59,18 +67,35 @@ namespace Devpendent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Slug,Name,Description,Image")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Slug,Name,Description,Image,ImageUpload")] Category category)
         {
             if (ModelState.IsValid)
             {
+                if (category.ImageUpload != null)
+                {
+                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/categories");
+                    var extension = Path.GetExtension(category.ImageUpload.FileName);
+                    string imageName = category.Slug + extension;
+
+                    string filePath = Path.Combine(uploadsDir, imageName);
+
+                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                    await category.ImageUpload.CopyToAsync(fs);
+                    fs.Close();
+
+                    category.Image = imageName;
+                }
+
                 _context.Add(category);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Manage));
             }
+
             return View(category);
         }
 
         // GET: Categories/Edit/5
+        [Breadcrumb(FromAction = "Manage", Title = "Edit category")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -91,7 +116,7 @@ namespace Devpendent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Slug,Name,Description,Image")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Slug,Name,Description,Image,ImageUpload")] Category category)
         {
             if (id != category.Id)
             {
@@ -102,6 +127,31 @@ namespace Devpendent.Controllers
             {
                 try
                 {
+                    if (category.ImageUpload != null)
+                    {
+                        string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/categories");
+                        var extension = Path.GetExtension(category.ImageUpload.FileName);
+                        string imageName = category.Slug + extension;
+
+                        string filePath = Path.Combine(uploadsDir, imageName);
+
+                        if (category.Image != null)
+                        {
+                            string oldImagePath = Path.Combine(uploadsDir, category.Image);
+
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
+                        }
+
+                        FileStream fs = new FileStream(filePath, FileMode.Create);
+                        await category.ImageUpload.CopyToAsync(fs);
+                        fs.Close();
+
+                        category.Image = imageName;
+                    }
+
                     _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
@@ -116,12 +166,13 @@ namespace Devpendent.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Manage));
             }
             return View(category);
         }
 
         // GET: Categories/Delete/5
+        [Breadcrumb(FromAction = "Manage", Title = "Delete category")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -155,7 +206,7 @@ namespace Devpendent.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Manage));
         }
 
         private bool CategoryExists(int id)

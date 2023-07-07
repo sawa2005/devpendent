@@ -1,4 +1,7 @@
-﻿namespace Devpendent.Models
+﻿using Devpendent.Data.Validation;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Devpendent.Models
 {
     public class Category
     {
@@ -7,5 +10,9 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+
+        [NotMapped]
+        [FileExtension]
+        public IFormFile ImageUpload { get; set; }
     }
 }
