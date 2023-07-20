@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Devpendent.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     [Breadcrumb("Categories")]
     public class CategoriesController : Controller
     {
