@@ -97,8 +97,8 @@ internal class Program
         {
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<DevpendentUser>>();
 
-            string email = "admin@admin.com";
-            string password = "Test1234.";
+            string email = "admin@devpendent.com";
+            string password = "8L%N2eQt0s41";
 
             if (await userManager.FindByEmailAsync(email) == null)
             {

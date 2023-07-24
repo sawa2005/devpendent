@@ -2,17 +2,26 @@
 
 <div>
     <div class="category-wrap">
-        @foreach (var item in Model)
-        {
-            <div class="category" style="background-image: url('/media/categories/@item.Image');">
-                <div>
-                    <div>
-                        <h3>@item.Name</h3>
-                        <p>@item.Description</p>
+        @{
+            var count = 0;
+
+            foreach (var item in Model)
+            {
+                if (count < 4)
+                {
+                    <div class="category" style="background-image: url('/media/categories/@item.Image');">
+                        <div>
+                            <div>
+                                <h3>@item.Name</h3>
+                                <p>@item.Description</p>
+                            </div>
+                            <a class="btn" asp-controller="Projects" asp-action="Index" asp-route-categorySlug="@item.Slug">Browse</a>
+                        </div>
                     </div>
-                    <a class="btn" asp-controller="Projects" asp-action="Index" asp-route-categorySlug="@item.Slug">Browse</a>
-                </div>
-            </div>
+
+                    count++;
+                }
+            }
         }
     </div>
     <div class="m-3 category-link">

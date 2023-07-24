@@ -1,7 +1,17 @@
 ﻿@model IEnumerable<Category>
 
+@{
 
-@foreach (var item in Model)
-{
-    <a asp-controller="Projects" asp-action="Index" asp-route-categorySlug="@item.Slug">@item.Name</a>
+    var count = 0;
+
+    foreach (var item in Model)
+    {
+        if (count < 4)
+        {
+            <a asp-controller="Projects" asp-action="Index" asp-route-categorySlug="@item.Slug">@item.Name</a>
+
+            count++;
+        }
+    }
+
 }

@@ -43,7 +43,15 @@ namespace Devpendent.Controllers
                 .Include(u => u.Educations)
                 .FirstOrDefaultAsync(m => m.UserName == userName);
 
-            ViewBag.ProjectCount = user.Projects.Count();
+            if (user.Projects != null)
+            {
+                ViewBag.ProjectCount = user.Projects.Count();
+            }
+
+            else
+            {
+                ViewBag.ProjectCount = 0;
+            }
 
             if (user == null)
             {
