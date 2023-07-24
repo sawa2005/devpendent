@@ -1,4 +1,4 @@
-h1, #Input_FirstName, #Input_LastName {
+h1, .user-profile-wrap #Input_FirstName, .user-profile-wrap #Input_LastName {
   font-family: "paralucent", sans-serif;
   font-weight: 300;
   font-style: normal;
@@ -517,6 +517,15 @@ main {
   display: flex;
   gap: 25px;
 }
+.user-profile-wrap #Input_FirstName, .user-profile-wrap #Input_LastName, .user-profile-wrap #Input_Location, .user-profile-wrap #Input_Website {
+  height: initial;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  border-radius: 0;
+  background: none;
+}
 
 .user-profile-text {
   display: flex;
@@ -613,21 +622,11 @@ main {
   border-radius: 10px !important;
 }
 
-#Input_FirstName, #Input_LastName, #Input_Location, #Input_Website {
-  height: initial;
-  border: none;
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-  border-radius: 0;
-  background: none;
-}
-
-.form-floating {
+.form-floating, .form {
   transition: all 0.2s ease;
 }
 
-.form-floating:hover {
+.form-floating:hover, .form:hover {
   background-color: #CECECE;
   border-radius: 10px;
 }
