@@ -4,7 +4,7 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="mb-4">@ViewData["Title"]</h1>
 
 <div class="row gap-5">
     <div class="col-md-4">
@@ -64,7 +64,7 @@
                             <p>
                                 @foreach (var provider in Model.ExternalLogins!)
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    <button type="submit" class="btn btn-clear" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><img src="/media/@{ @provider.DisplayName }.png" class="me-2">@provider.DisplayName</button>
                                 }
                             </p>
                         </div>

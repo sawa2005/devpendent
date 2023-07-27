@@ -5,12 +5,20 @@ using Devpendent.Data;
 using Devpendent.Areas.Identity.Data;
 using SmartBreadcrumbs.Extensions;
 using System.Reflection;
+using Devpendent.Infrastructure.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 internal class Program
 {
     private static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+        {
+            googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+            googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+        });
 
         builder.Services.AddDistributedMemoryCache();
 
@@ -45,6 +53,9 @@ internal class Program
             options.ActiveLiClasses = "breadcrumb-item active";
             options.SeparatorElement = "<li class=\"separator\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"5.186\" height=\"9.073\" viewBox=\"0 0 5.186 9.073\"><path d=\"M13.5,16.234l3.617-3.617L13.5,9\" transform=\"translate(-12.581 -8.081)\" fill=\"none\" stroke=\"#777\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.3\"/></svg></li>";
         });
+
+        builder.Services.AddTransient<IEmailSender, EmailSender>();
+        builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
         var app = builder.Build();
 
