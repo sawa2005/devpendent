@@ -18,12 +18,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Devpendent.Data;
 
 namespace Devpendent.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel
     {
+        private readonly DevpendentContext _context;
         private readonly SignInManager<DevpendentUser> _signInManager;
         private readonly UserManager<DevpendentUser> _userManager;
         private readonly IUserStore<DevpendentUser> _userStore;
@@ -32,12 +34,14 @@ namespace Devpendent.Areas.Identity.Pages.Account
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
+            DevpendentContext context,
             SignInManager<DevpendentUser> signInManager,
             UserManager<DevpendentUser> userManager,
             IUserStore<DevpendentUser> userStore,
             ILogger<ExternalLoginModel> logger,
             IEmailSender emailSender)
         {
+            _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
             _userStore = userStore;
@@ -85,6 +89,17 @@ namespace Devpendent.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+            [Required]
+            public string Username { get; set; }
+
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -150,12 +165,22 @@ namespace Devpendent.Areas.Identity.Pages.Account
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
+            if (_context.Users.Any(i => i.UserName == Input.Username))
+            {
+                ModelState.AddModelError("Input.Username", "This username is already in use.");
+            }
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                user.RegisterDate = DateTime.Now;
+                user.Image = "dp-default.png";
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
