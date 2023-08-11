@@ -19,6 +19,7 @@ using SmartBreadcrumbs.Attributes;
 
 namespace Devpendent.Areas.Identity.Pages.Account.Manage
 {
+    [Breadcrumb("Manage your account", AreaName = "Identity")]
     public class IndexModel : PageModel
     {
         private readonly DevpendentContext _context;

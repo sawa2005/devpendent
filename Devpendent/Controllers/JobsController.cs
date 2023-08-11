@@ -13,10 +13,13 @@ using Microsoft.AspNetCore.Identity;
 using SmartBreadcrumbs.Nodes;
 using SmartBreadcrumbs.Attributes;
 using Microsoft.AspNetCore.Authorization;
+using Devpendent.Areas.Identity.Pages.Account.Manage;
+using System.Runtime.CompilerServices;
 
 namespace Devpendent.Controllers
 {
     [Authorize]
+    [Breadcrumb("Manage your jobs", FromPage = typeof(IndexModel))]
     public class JobsController : Controller
     {
         private readonly DevpendentContext _context;
@@ -36,43 +39,14 @@ namespace Devpendent.Controllers
 
             var userId = claims.Value;
 
-            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
-            var jobsNode = new MvcBreadcrumbNode("Index", "Jobs", "ViewData.Title") { Parent = accountNode };
-
-            ViewData["BreadcrumbNode"] = jobsNode;
-
             var devpendentContext = _context.Jobs.Where(j => j.UserId == userId);
             return View(await devpendentContext.ToListAsync());
         }
 
-        // GET: Jobs/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Jobs == null)
-            {
-                return NotFound();
-            }
-
-            var job = await _context.Jobs
-                .Include(j => j.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (job == null)
-            {
-                return NotFound();
-            }
-
-            return View(job);
-        }
-
         // GET: Jobs/Create
+        [Breadcrumb("Create job")]
         public IActionResult Create()
         {
-            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
-            var jobsNode = new MvcBreadcrumbNode("Index", "Jobs", "Manage your jobs") { Parent = accountNode };
-            var jobNode = new MvcBreadcrumbNode("Index", "Jobs", "Create job") { Parent = jobsNode };
-
-            ViewData["BreadcrumbNode"] = jobNode;
-
             return View();
         }
 
@@ -99,6 +73,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Jobs/Edit/5
+        [Breadcrumb("ViewData.Title")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Jobs == null)
@@ -111,12 +86,6 @@ namespace Devpendent.Controllers
             {
                 return NotFound();
             }
-
-            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
-            var jobsNode = new MvcBreadcrumbNode("Index", "Jobs", "Manage your jobs") { Parent = accountNode };
-            var jobNode = new MvcBreadcrumbNode("Index", "Jobs", "Edit " + job.Title) { Parent = jobsNode };
-
-            ViewData["BreadcrumbNode"] = jobNode;
 
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", job.UserId);
             return View(job);
@@ -159,6 +128,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Jobs/Delete/5
+        [Breadcrumb("Delete?")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Jobs == null)

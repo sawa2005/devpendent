@@ -12,10 +12,13 @@ using Devpendent.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using SmartBreadcrumbs.Nodes;
 using Microsoft.AspNetCore.Authorization;
+using SmartBreadcrumbs.Attributes;
+using Devpendent.Areas.Identity.Pages.Account.Manage;
 
 namespace Devpendent.Controllers
 {
     [Authorize]
+    [Breadcrumb("Manage your educations", FromPage = typeof(IndexModel))]
     public class EducationsController : Controller
     {
         private readonly DevpendentContext _context;
@@ -35,43 +38,14 @@ namespace Devpendent.Controllers
 
             var userId = claims.Value;
 
-            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
-            var educationsNode = new MvcBreadcrumbNode("Index", "Educations", "ViewData.Title") { Parent = accountNode };
-
-            ViewData["BreadcrumbNode"] = educationsNode;
-
             var devpendentContext = _context.Educations.Where(j => j.UserId == userId);
             return View(await devpendentContext.ToListAsync());
         }
 
-        // GET: Educations/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Educations == null)
-            {
-                return NotFound();
-            }
-
-            var education = await _context.Educations
-                .Include(e => e.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (education == null)
-            {
-                return NotFound();
-            }
-
-            return View(education);
-        }
-
         // GET: Educations/Create
+        [Breadcrumb("Create education")]
         public IActionResult Create()
         {
-            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
-            var educationsNode = new MvcBreadcrumbNode("Index", "Educations", "Manage your educations") { Parent = accountNode };
-            var educationNode = new MvcBreadcrumbNode("Create", "Educations", "Create education") { Parent = educationsNode };
-
-            ViewData["BreadcrumbNode"] = educationNode;
-
             return View();
         }
 
@@ -99,6 +73,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Educations/Edit/5
+        [Breadcrumb("ViewData.Title")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Educations == null)
@@ -111,12 +86,6 @@ namespace Devpendent.Controllers
             {
                 return NotFound();
             }
-
-            var accountNode = new MvcRouteBreadcrumbNode("Identity", "Manage your account") { RouteValues = new { id = "" } };
-            var educationsNode = new MvcBreadcrumbNode("Index", "Educations", "Manage your educations") { Parent = accountNode };
-            var educationNode = new MvcBreadcrumbNode("Edit", "Educations", "Edit " + education.Title) { Parent = educationsNode };
-
-            ViewData["BreadcrumbNode"] = educationNode;
 
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", education.UserId);
             return View(education);
@@ -159,6 +128,7 @@ namespace Devpendent.Controllers
         }
 
         // GET: Educations/Delete/5
+        [Breadcrumb("Delete?")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Educations == null)
