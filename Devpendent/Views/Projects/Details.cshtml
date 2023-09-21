@@ -7,7 +7,7 @@
 <h1>@Html.DisplayFor(model => model.Title)</h1>
 
 <div class="project-user-wrap">
-    <img src="/media/users/@Html.DisplayFor(model => model.User.Image)" class="project-pfp"/>
+    <img src="/media/users/@Html.DisplayFor(model => model.User.Image)" class="project-pfp" alt="@Model.User.UserName's Profile Picture"/>
     <div>
         <h5>@Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)</h5>
         <p>@@@Html.DisplayFor(model => model.User.UserName)</p>
@@ -15,7 +15,7 @@
 </div>
 
 <div class="project-image-wrap my-5">
-    <img src="/media/projects/@Html.DisplayFor(model => model.Image)"/>
+    <img src="/media/projects/@Html.DisplayFor(model => model.Image)" alt="Project Image" />
     <div class="shortinfo">
         <h3>Short info</h3>
         <div class="mb-4">
@@ -55,7 +55,7 @@
     <div class="project-dev-wrap mb-5">
         <h3>About this developer</h3>
         <div>
-            <img src="/media/users/@Html.DisplayFor(model => model.User.Image)" />
+            <img src="/media/users/@Html.DisplayFor(model => model.User.Image)" alt="@Model.User.UserName's Profile Picture" />
             <div>
                 <div>
                     <h4>@Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)</h4>

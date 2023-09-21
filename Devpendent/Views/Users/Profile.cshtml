@@ -9,7 +9,7 @@
 <div class="user-main-wrap mb-5">
     <div>
         <div class="user-profile-wrap mb-5">
-            <img src="../media/users/@Model.Image" />
+            <img src="../media/users/@Model.Image" alt="@Model.UserName 's Profile Picture" />
             <div class="user-profile-text">
                 <div>
                     <h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h1>
@@ -137,7 +137,7 @@
                             </div>
                             <div class="project-text-wrap">
                                 <div class="project-user-wrap">
-                                    <img src="/media/users/@item.User.Image" class="project-pfp">
+                                    <img src="/media/users/@item.User.Image" class="project-pfp" alt="@item.User.UserName 's Profile Picture">
                                     <div>
                                         <h5>@item.User.FirstName @item.User.LastName</h5>
                                         <p>@@@item.User.UserName</p>

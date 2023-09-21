@@ -22,7 +22,7 @@
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm" aria-label="main">
                 <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="default-logo" alt="Devpendent Logo" /></a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="data:," class="default-logo" alt="Devpendent Logo" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon">
@@ -35,7 +35,7 @@
                             </svg>
                         </span>
                     </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <div id="navbarSupportedContent" class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Projects" asp-action="Index">Browse</a>
@@ -44,8 +44,8 @@
                             <li class="search-wrap">
                                 @using (Html.BeginForm("Index", "Projects", FormMethod.Get, new { id = "search-form" }))
                                 {
-                                    @Html.TextBox("SearchString", "", new { placeholder = "What project do you need done?" })
-                                    <button type="submit">
+                                    @Html.TextBox("SearchString", "", new { placeholder = "What project do you need done?", @aria_label = "Search Projects" })
+                                    <button type="submit" title="Search">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="49" height="48" viewBox="0 0 49 48">
                                             <g stroke="#000" stroke-width="1">
                                                 <path d="M0,0H34A15,15,0,0,1,49,15V33A15,15,0,0,1,34,48H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" stroke="none" />
@@ -70,7 +70,7 @@
                 {
                     <breadcrumb>
                         <li class="breadcrumbs-item home">
-                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" title="Home">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14.498" height="15.964" viewBox="0 0 14.498 15.964">
                                     <g id="Icon_feather-home" data-name="Icon feather-home" transform="translate(-3.85 -2.35)">
                                         <path id="Path_5" data-name="Path 5" d="M4.5,8.132,11.1,3l6.6,5.132V16.2a1.466,1.466,0,0,1-1.466,1.466H5.966A1.466,1.466,0,0,1,4.5,16.2Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" />

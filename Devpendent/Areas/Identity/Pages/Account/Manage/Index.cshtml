@@ -16,7 +16,7 @@
                 <div class="user-manage-wrap">
                     <div class="user-profile-wrap mt-4 mb-5">
                         <div>
-                            <img id="imgpreview" class="mb-3" src="/media/users/@Model.Image" />
+                            <img id="imgpreview" class="mb-3" src="/media/users/@Model.Image" alt="Profile Picture Preview" />
                             <div class="form-group">
                                 <label asp-for="Input.ImageUpload" class="control-label">Edit profile picture</label>
                                 <input asp-for="Input.ImageUpload" class="form-control" />
@@ -112,7 +112,7 @@
                 </div>
                 <div class="form-floating mb-4">
                     <label asp-for="Input.ContactText" class="form-label">Contact text</label>
-                    <textarea asp-for="Input.ContactText" id="contact-text" class="form-control pt-5"></textarea>
+                    <textarea asp-for="Input.ContactText" class="form-control pt-5"></textarea>
                     <span asp-validation-for="Input.ContactText" class="text-danger"></span>
                 </div>
             </div>

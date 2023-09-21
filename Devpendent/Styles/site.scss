@@ -9,7 +9,7 @@ h2 {
     font-family: "paralucent", sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-size: 2.222rem;
+    font-size: 2rem;
     margin-bottom: 20px;
 }
 
@@ -53,6 +53,10 @@ a {
     font-style: normal;
     color: #317E53;
     text-decoration: underline;
+}
+
+.info-text {
+    color: #d82424;
 }
 
 body {
@@ -181,7 +185,7 @@ main {
     }
 
     a {
-        color: #777777;
+        color: #000;
         text-decoration: none;
     }
 
@@ -216,6 +220,13 @@ main {
 
 .default-logo {
     content: url("/media/logo_black.png");
+}
+
+.gradient {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to left, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 80%);
 }
 
 .home-bg {
@@ -772,7 +783,7 @@ main {
     border: 0;
 }
 
-#contact-text {
+#Input_ContactText {
     min-height: 200px;
 }
 
