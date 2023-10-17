@@ -8,13 +8,13 @@
 <partial name="_StatusMessage" for="StatusMessage" />
 @if (Model.CurrentLogins?.Count > 0)
 {
-    <h3>Registered Logins</h3>
+    <h3>Your Registered Logins</h3>
     <table class="table">
         <tbody>
             @foreach (var login in Model.CurrentLogins)
             {
                 <tr>
-                    <td id="@($"login-provider-{login.LoginProvider}")">@login.ProviderDisplayName</td>
+                    <td id="@($"login-provider-{login.LoginProvider}")"><img src="/media/@{ @login.ProviderDisplayName }.png" class="me-2" alt="@login.ProviderDisplayName Logo"> @login.ProviderDisplayName</td>
                     <td>
                         @if (Model.ShowRemoveButton)
                         {

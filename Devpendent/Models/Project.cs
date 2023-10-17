@@ -22,6 +22,7 @@ namespace Devpendent.Models
         public string Description { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
         [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a budget for your project")]
         [Column(TypeName = "decimal(8, 2)")]
         public decimal Budget { get; set; }

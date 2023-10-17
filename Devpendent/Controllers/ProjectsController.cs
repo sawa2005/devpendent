@@ -380,7 +380,7 @@ namespace Devpendent.Controllers
 
             TempData["Success"] = "The project has been deleted!";
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Manage));
         }
 
         private bool ProjectExists(int id)

@@ -64,8 +64,8 @@
     </div>
     <div class="container">
         <main role="main">
+            <partial name="_NotificationPartial" />
             <div class="row">
-                <partial name="_NotificationPartial" />
                 @if (ViewContext.RouteData.Values["area"] == null)
                 {
                     <breadcrumb>
