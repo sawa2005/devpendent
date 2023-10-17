@@ -116,7 +116,10 @@
                     <span asp-validation-for="Input.ContactText" class="text-danger"></span>
                 </div>
             </div>
-            <input id="update-profile-button" type="submit" value="Save profile changes" class="btn btn-lg" />
+            <div>
+                <input id="update-profile-button" type="submit" value="Save profile changes" class="btn btn-lg mb-2" />
+                <a class="btn btn-clear py-2 mb-2" asp-controller="Users" asp-action="Profile" asp-route-userName="@Model.Username">View profile</a>
+            </div>
         </form>
         <div class="mt-5 jobs-wrap">
             <h3>Previous work experience</h3>
