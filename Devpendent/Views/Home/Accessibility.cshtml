@@ -2,6 +2,39 @@
     ViewData["Title"] = "Accessibility";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="mb-5">@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's accessibility.</p>
+<div class="main-wrap">
+    <div class="content-wrap">
+        <div class="mb-3" id="whatis">
+            <h2>What is this page?</h2>
+            <p>On this page, we describe how well our website comply with the Act on Accessibility to Digital Public Services. We also address known shortcomings and how we plan to fix them.</p>
+        </div>
+        <div class="mb-5" id="how">
+            <h3>How accessible is this website?</h3>
+            <p>The website has minor faults but mostly complies with the laws for accessibility.</p>
+        </div>
+        <div class="mb-5" id="faults">
+            <h2>Faults in this websites accessiblity</h2>
+            <h3>Report faults</h3>
+            <p>We are always looking to improve and maintain the websites accessibility. If you have discovered any faults which we have not mentioned here you can contact us about them. You can contact us through <a href="mailto:contact@devlancer.one">our email</a>.</p>
+            <h3>Currently known faults</h3>
+            <ul>
+                <li>H2 heading level skipped on some pages.</li>
+            </ul>
+        </div>
+        <div id="tests">
+            <h2>How we've tested</h2>
+            <p>We tested the website ourselves internally last the 21st of September 2023. During this tests a variety of tools were used to validate and examine the accessibility of the website. Most of the faults from that examination were also fixed during this process.</p>
+        </div>
+    </div>
+    <div class="instruction">
+        <h4>Navigation</h4>
+        <ul class="list-unstyled">
+            <li><a class="text-black" href="#whatis">What is this page?</a></li>
+            <li><a class="text-black" href="#how">How accessible is this website?</a></li>
+            <li><a class="text-black" href="#faults">Faults in this websites accessiblity</a></li>
+            <li><a class="text-black" href="#tests">How we've tested</a></li>
+        </ul>
+    </div>
+</div>
