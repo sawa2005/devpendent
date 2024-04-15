@@ -3,9 +3,10 @@
     "mssql2": {
       "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/Devpendent/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsDbConnection_32F017B830",
       "secretStore": "AzureAppSettings",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/devpendentdbserver/databases/Devpendent_db",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/devpendentdbserver/databases/DevpendentDB",
       "type": "mssql.azure",
-      "connectionId": "ConnectionStrings:DbConnection"
+      "connectionId": "ConnectionStrings:DbConnection",
+      "dynamicId": null
     }
   }
 }

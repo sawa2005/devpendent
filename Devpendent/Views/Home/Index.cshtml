@@ -3,7 +3,23 @@
 }
 
 <div class="mt-section">
-    <h2>Browse by category</h2>
+    <h2>Browse projects</h2>
+    <div class="search-wrap mb-5">
+        @using (Html.BeginForm("Index", "Projects", FormMethod.Get, new { id = "search-form" }))
+        {
+            @Html.TextBox("SearchString", "", new { placeholder = "What project do you need done?", @aria_label = "Search Projects" })
+            <button type="submit" title="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="49" height="48" viewBox="0 0 49 48">
+                    <g stroke="#000" stroke-width="1">
+                        <path d="M0,0H34A15,15,0,0,1,49,15V33A15,15,0,0,1,34,48H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" stroke="none" />
+                        <path d="M.5.5H34A14.5,14.5,0,0,1,48.5,15V33A14.5,14.5,0,0,1,34,47.5H.5a0,0,0,0,1,0,0V.5A0,0,0,0,1,.5.5Z" fill="none" />
+                    </g>
+                    <path d="M24.26,23.045,18.7,17.432a7.925,7.925,0,1,0-1.2,1.218l5.525,5.577a.856.856,0,0,0,1.208.031A.861.861,0,0,0,24.26,23.045ZM12.472,18.718A6.258,6.258,0,1,1,16.9,16.886,6.219,6.219,0,0,1,12.472,18.718Z" transform="translate(10.002 9.507)" fill="#fff" />
+                </svg>
+            </button>
+        }
+    </div>
+    <h3>Categories</h3>
     <vc:categories view="" />
 </div>
 
