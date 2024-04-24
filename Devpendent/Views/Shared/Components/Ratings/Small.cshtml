@@ -1,0 +1,16 @@
+﻿<div class="rating-wrap mb-2">
+
+    @if (Model < 3)
+    {
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.51" viewBox="0 0 10 9.51">
+            <path d="M8,3,9.545,6.13l3.455.5L10.5,9.07l.59,3.44L8,10.885,4.91,12.51,5.5,9.07,3,6.635l3.455-.5Z" transform="translate(-3 -3)" fill="#adadad" />
+        </svg>
+    } else
+    {
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="9.51" viewBox="0 0 10 9.51">
+            <path d="M8,3,9.545,6.13l3.455.5L10.5,9.07l.59,3.44L8,10.885,4.91,12.51,5.5,9.07,3,6.635l3.455-.5Z" transform="translate(-3 -3)" fill="#fcba03" />
+        </svg>
+    }
+
+    <p>@Model (@ViewBag.ReviewCount)</p>
+</div>

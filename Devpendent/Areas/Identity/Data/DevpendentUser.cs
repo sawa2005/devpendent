@@ -36,5 +36,6 @@ public class DevpendentUser : IdentityUser
     public ICollection<Job> Jobs { get; set; }
     public ICollection<Education> Educations { get; set; }
     public ICollection<Project> Projects { get; set; }
+    public ICollection<Review> Reviews { get; set; }
 }
 

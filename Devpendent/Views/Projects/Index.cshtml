@@ -65,7 +65,8 @@ if (ViewBag.CurrentSort != null)
                                     <img src="/media/users/@item.User.Image" class="project-pfp" alt="@item.User.UserName Profile Picture">
                                     <div>
                                         <h5>@item.User.FirstName @item.User.LastName</h5>
-                                        <p>@@@item.User.UserName</p>
+                                        <vc:ratings id="0" type="small" user-name="@item.User.UserName" />
+                                        @* <p>@@@item.User.UserName</p> *@
                                     </div>
                                 </div>
                                 <div class="mt-3 project-desc-wrap">

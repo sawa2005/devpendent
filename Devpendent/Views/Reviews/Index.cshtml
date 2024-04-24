@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Devpendent.Models.Review>
+
+@{
+    ViewData["Title"] = "All @" + ViewBag.Username + "'s Reviews";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (ViewBag.CreateReview != false)
+{
+    <p>
+        <a class="btn" asp-action="Create" asp-route-userName="@ViewBag.Username">Leave a Review</a>
+    </p>
+}
+
+<div class="reviews-wrap">
+    <div>
+        @if (ViewBag.ReviewCount == 1)
+        {
+            <p class="mb-0">1 review</p>
+        }
+
+        else
+        {
+            <p class="mb-0">@ViewBag.ReviewCount reviews</p>
+        }
+
+        <vc:ratings id="0" type="average" user-name="@ViewBag.Username" />
+    </div>
+    
+    @if (Model.Count() < 1)
+    {
+        <p>Nothing here yet.</p>
+    }
+
+    else
+    {
+        @foreach (var item in Model)
+        {
+            <div class="review">
+                <h4>@item.Title</h4>
+                <div>
+                    <h5>@@@item.Author</h5>
+                    <vc:ratings id="@item.Id" type="single" user-name="@ViewBag.Username" />
+                    <p>@item.Text</p>
+                </div>
+            </div>
+        }
+    }
+</div>

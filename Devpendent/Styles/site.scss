@@ -463,6 +463,16 @@ main {
     }
 }
 
+.project-dev-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .btn-clear {
+        max-width: 111px;
+    }
+}
+
 .project-main-wrap {
     max-width: 825px;
 }
@@ -799,6 +809,13 @@ main {
     }
 }
 
+.reviews-wrap {
+    max-width: 712px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .form-check-input {
     margin-top: 0;
 }
@@ -826,6 +843,18 @@ main {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+}
+
+.rating-wrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 20px;
+
+    h5 {
+        margin-bottom: 0;
+        height: 14px;
+    }
 }
 
 @media (hover: hover) {

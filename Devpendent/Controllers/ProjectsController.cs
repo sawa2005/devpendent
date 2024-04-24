@@ -135,10 +135,13 @@ namespace Devpendent.Controllers
         }
 
         // GET: Projects/Manage
+        [Authorize]
         [Breadcrumb(Title = "My projects")]
         public async Task<IActionResult> Manage()
         {
-            var dataContext = _context.Projects.Include(p => p.Category).Include(p => p.User);
+            var currentUser = User.Identity.Name;
+            var dataContext = _context.Projects.Where(p => p.User.UserName == currentUser).Include(p => p.Category).Include(p => p.User);
+
             return View(await dataContext.ToListAsync());
         }
 
@@ -246,6 +249,7 @@ namespace Devpendent.Controllers
             }
 
             var project = await _context.Projects.FindAsync(id);
+
             if (project == null)
             {
                 return NotFound();
@@ -259,7 +263,20 @@ namespace Devpendent.Controllers
 
             ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", project.CategoryId);
 
-            return View(project);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var userId = claims.Value;
+
+            if (project.UserId == userId)
+            {
+                return View(project);
+            } 
+            
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: Projects/Edit/5
@@ -340,12 +357,26 @@ namespace Devpendent.Controllers
             var project = await _context.Projects
                 .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (project == null)
             {
                 return NotFound();
             }
 
-            return View(project);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var userId = claims.Value;
+
+            if (project.UserId == userId)
+            {
+                return View(project);
+            }
+
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: Projects/Delete/5

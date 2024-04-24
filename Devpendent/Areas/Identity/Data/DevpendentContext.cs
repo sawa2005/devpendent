@@ -16,6 +16,7 @@ public class DevpendentContext : IdentityDbContext<DevpendentUser>
     public DbSet<Category> Categories { get; set; }
     public DbSet<Education> Educations { get; set; }
     public DbSet<Job> Jobs { get; set; }
+    public DbSet<Review> Reviews { get; set; }
     public DbSet<DevpendentUser> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -27,6 +28,12 @@ public class DevpendentContext : IdentityDbContext<DevpendentUser>
 
         builder.Entity<DevpendentUser>()
             .HasMany(e => e.Jobs)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId)
+            .IsRequired();
+
+        builder.Entity<DevpendentUser>()
+            .HasMany(e => e.Reviews)
             .WithOne(e => e.User)
             .HasForeignKey(e => e.UserId)
             .IsRequired();

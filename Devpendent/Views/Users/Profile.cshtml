@@ -73,6 +73,7 @@
                             Member since @Model.RegisterDate.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-GB"))
                         </p>
                     </div>
+                    <vc:ratings id="0" type="average" user-name="@Model.UserName" />
                 </div>
             </div>
         </div>
@@ -211,3 +212,49 @@
     }
 </div>
 
+<div class="mt-5 reviews-wrap">
+    <div>
+        <h3>Reviews</h3>
+
+        @if (ViewBag.ReviewCount == 1)
+        {
+            <p class="mb-0">1 review</p>
+        }
+
+        else
+        {
+            <p class="mb-0">@ViewBag.ReviewCount reviews</p>
+        }
+        <vc:ratings id="0" type="average" user-name="@Model.UserName" />
+    </div>
+
+    @if (Model.Reviews.Count < 1)
+    {
+        <p>Nothing here yet.</p>
+    }
+
+    else
+    {
+        var count = 0;
+
+        @foreach (var item in Model.Reviews.OrderByDescending(r => r.Date))
+        {
+            @if (count < 6)
+            {
+                <div class="review">
+                    <h4>@item.Title</h4>
+                    <div>
+                        <h5>@@@item.Author</h5>
+                        <vc:ratings id="@item.Id" type="single" user-name="@Model.UserName" />
+                        <p>@item.Text</p>
+                    </div>
+                </div>
+            }
+             count++;
+        }
+    }
+
+    <div class="m-3 category-link">
+        <a asp-controller="Reviews" asp-action="Index" asp-route-userName="@Model.UserName">View all</a>
+    </div>
+</div>

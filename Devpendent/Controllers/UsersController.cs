@@ -41,7 +41,13 @@ namespace Devpendent.Controllers
                 .Include(u => u.Projects)
                 .Include(u => u.Jobs)
                 .Include(u => u.Educations)
+                .Include(u => u.Reviews)
                 .FirstOrDefaultAsync(m => m.UserName == userName);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             if (user.Projects != null)
             {
@@ -53,9 +59,14 @@ namespace Devpendent.Controllers
                 ViewBag.ProjectCount = 0;
             }
 
-            if (user == null)
+            if (user.Reviews != null)
             {
-                return NotFound();
+                ViewBag.ReviewCount = user.Reviews.Count();
+            }
+
+            else
+            {
+                ViewBag.ReviewCount = 0;
             }
 
             var userNode = new MvcBreadcrumbNode("Profile", "Users", "ViewData.Title");

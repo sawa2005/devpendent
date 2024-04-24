@@ -88,7 +88,21 @@ namespace Devpendent.Controllers
             }
 
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", education.UserId);
-            return View(education);
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var userId = claims.Value;
+
+            if (education.UserId == userId)
+            {
+                return View(education);
+            }
+
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: Educations/Edit/5
@@ -139,12 +153,26 @@ namespace Devpendent.Controllers
             var education = await _context.Educations
                 .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (education == null)
             {
                 return NotFound();
             }
 
-            return View(education);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var userId = claims.Value;
+
+            if (education.UserId == userId)
+            {
+                return View(education);
+            }
+
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: Educations/Delete/5

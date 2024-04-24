@@ -88,7 +88,21 @@ namespace Devpendent.Controllers
             }
 
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", job.UserId);
-            return View(job);
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var userId = claims.Value;
+
+            if (job.UserId == userId)
+            {
+                return View(job);
+            }
+
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: Jobs/Edit/5
@@ -144,7 +158,20 @@ namespace Devpendent.Controllers
                 return NotFound();
             }
 
-            return View(job);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var userId = claims.Value;
+
+            if (job.UserId == userId)
+            {
+                return View(job);
+            }
+
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: Jobs/Delete/5

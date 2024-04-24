@@ -34,6 +34,7 @@ namespace Devpendent.Models
 
         [NotMapped]
         [FileExtension]
+        [Required(ErrorMessage = "Please upload a cover image")]
         public IFormFile ImageUpload { get; set; }
 
         [Required, Range(1, int.MaxValue, ErrorMessage = "Please choose a category")]
