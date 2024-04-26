@@ -49,6 +49,8 @@ namespace Devpendent.Controllers
                 return NotFound();
             }
 
+            user.Image ??= "dp-default.png";
+
             if (user.Projects != null)
             {
                 ViewBag.ProjectCount = user.Projects.Count();
