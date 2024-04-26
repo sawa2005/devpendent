@@ -14,7 +14,9 @@
                 <div>
                     <h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h1>
                     <p>@@@Html.DisplayFor(model => model.UserName)</p>
+                    <vc:ratings id="0" type="average" user-name="@Model.UserName" />
                 </div>
+
                 @if (Model.Specialties == null)
                 {
                     <p class="my-3">No specialties added yet.</p>
@@ -73,7 +75,6 @@
                             Member since @Model.RegisterDate.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-GB"))
                         </p>
                     </div>
-                    <vc:ratings id="0" type="average" user-name="@Model.UserName" />
                 </div>
             </div>
         </div>
