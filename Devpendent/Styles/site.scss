@@ -105,6 +105,16 @@ main {
     position: relative;
     width: 100%;
     color: #fff;
+    background: rgb(31,112,70);
+    background: radial-gradient(circle, rgba(31,112,70,1) 0%, rgba(13,50,31,1) 65%);
+
+    header {
+        a {
+            background: #fff;
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+    }
 
     .navbar {
         padding: 40px;
@@ -127,6 +137,18 @@ main {
         padding: 8px 15px !important;
     }
 }
+
+.glassy-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(75px);
+    pointer-events: none;
+}
+
 
 .default-main {
     .navbar {
@@ -244,9 +266,8 @@ main {
     width: 100%;
     height: fit-content;
     margin: auto;
-    position: absolute;
     right: 0;
-    top: 50vh;
+    top: 0;
     bottom: 0;
     transition: opacity 0.3s ease;
 }
@@ -264,6 +285,7 @@ main {
     position: absolute;
     top: 0;
     width: 100%;
+    height: 100%;
 }
 
 .category-wrap {
