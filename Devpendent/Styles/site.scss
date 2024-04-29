@@ -1049,8 +1049,20 @@ main {
         padding: 18px 21px;
     }
 
+    .nav-menu {
+        gap: 100px;
+    }
+
     .home-text {
         padding: 0px 20px;
+
+        .home-title {
+            font-size: 2rem;
+        }
+
+        .home-desc {
+            font-size: 1rem;
+        }
     }
 
     main {
