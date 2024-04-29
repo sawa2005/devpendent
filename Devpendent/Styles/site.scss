@@ -80,6 +80,10 @@ body {
     padding: 0 !important;
 }
 
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
 .mt-section {
     margin-top: 120px;
 }
@@ -109,6 +113,9 @@ main {
     background: radial-gradient(circle, rgba(31,112,70,1) 0%, rgba(13,50,31,1) 65%);
 
     header {
+        position: relative;
+        z-index: 999;
+
         a {
             background: #fff;
             background-clip: text;
@@ -163,6 +170,7 @@ main {
 
         a.btn {
             line-height: 32px !important;
+            min-width: 86px;
         }
 
         li {
@@ -1049,7 +1057,7 @@ main {
         padding: 18px 21px;
     }
 
-    .nav-menu {
+    .home-main .nav-menu {
         gap: 100px;
     }
 
