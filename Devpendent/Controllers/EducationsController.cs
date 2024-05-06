@@ -110,7 +110,7 @@ namespace Devpendent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,UniversityName,GraduationYear,UserId")] Education education)
+        public async Task<IActionResult> Edit(int id, Education education)
         {
             if (id != education.Id)
             {

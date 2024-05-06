@@ -17,6 +17,8 @@ using SmartBreadcrumbs.Attributes;
 using SmartBreadcrumbs.Nodes;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.CodeAnalysis;
+using Project = Devpendent.Models.Project;
 
 namespace Devpendent.Controllers
 {
@@ -163,6 +165,8 @@ namespace Devpendent.Controllers
                 return NotFound();
             }
 
+            project.Image ??= "pt-default.png";
+
             var projectsNode = new MvcBreadcrumbNode("Index", "Projects", "Projects");
             var categoryNode = new MvcBreadcrumbNode("Index", "Projects", project.Category.Name) 
             { 
@@ -220,6 +224,11 @@ namespace Devpendent.Controllers
                     fs.Close();
 
                     project.Image = imageName;
+                } 
+                
+                else
+                {
+                    project.Image = "pt-default.png";
                 }
 
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -331,6 +340,8 @@ namespace Devpendent.Controllers
 
                     project.Image = imageName;
                 }
+                
+                // else project.Image ??= "pt-default.png";
 
                 project.CategoryId = input.CategoryId;
 
@@ -356,6 +367,7 @@ namespace Devpendent.Controllers
 
             var project = await _context.Projects
                 .Include(p => p.Category)
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (project == null)
@@ -367,6 +379,10 @@ namespace Devpendent.Controllers
             var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var userId = claims.Value;
+
+            var projectsNode = new MvcBreadcrumbNode("Index", "Projects", "Projects");
+            var myProjectsNode = new MvcBreadcrumbNode("Manage", "Projects", "My projects") { Parent = projectsNode };
+            var projectNode = new MvcBreadcrumbNode("Delete", "Projects", "Delete " + project.Title) { Parent = myProjectsNode };
 
             if (project.UserId == userId)
             {
