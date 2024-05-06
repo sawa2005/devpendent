@@ -611,6 +611,12 @@ main {
     }
 }
 
+.user-bio {
+    > * {
+        margin-bottom: 1rem !important;
+    }
+}
+
 .user-profile-wrap {
     display: flex;
     gap: 25px;
