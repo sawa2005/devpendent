@@ -104,13 +104,13 @@ using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<DevpendentUser>>();
 
-    string email = "admin@devpendent.com";
-    string password = "8L%N2eQt0s41";
+    string email = builder.Configuration["Admin:Email"];
+    string password = builder.Configuration["Admin:Password"];
 
     if (await userManager.FindByEmailAsync(email) == null)
     {
         var user = new DevpendentUser();
-        user.UserName = "admin";
+        user.UserName = builder.Configuration["Admin:Username"];
         user.Email = email;
         user.EmailConfirmed = true;
 
