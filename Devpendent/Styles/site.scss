@@ -574,7 +574,7 @@ main {
     font-weight: 300;
     font-style: normal;
     border-radius: 13px;
-    border: 1px solid #000;
+    border: 1px solid #000 !important;
     background: none;
     color: #000;
 }
@@ -892,6 +892,10 @@ main {
         margin-bottom: 0;
         height: 14px;
     }
+}
+
+.table * {
+    border: none;
 }
 
 @media (hover: hover) {
