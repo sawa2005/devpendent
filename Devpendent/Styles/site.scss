@@ -898,6 +898,10 @@ main {
     border: none;
 }
 
+.twofactor .btn {
+    margin-bottom: 8px
+}
+
 @media (hover: hover) {
     .btn {
         transition: 0.2s ease;
