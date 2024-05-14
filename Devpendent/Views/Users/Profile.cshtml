@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="budget-wrap">
                                         <h4>Budget</h4>
-                                        <h3>@item.Budget</h3>
+                                        <h3>@item.Budget USD</h3>
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +216,6 @@
 <div class="mt-5 reviews-wrap">
     <div>
         <h3>Reviews</h3>
-
         @if (ViewBag.ReviewCount == 1)
         {
             <p class="mb-0">1 review</p>
@@ -227,6 +226,11 @@
             <p class="mb-0">@ViewBag.ReviewCount reviews</p>
         }
         <vc:ratings id="0" type="average" user-name="@Model.UserName" />
+
+        @if (ViewBag.CreateReview != false)
+        {
+            <a asp-controller="Reviews" asp-action="Create" asp-route-userName="@Model.UserName" class="btn btn-clear my-2">Leave a Review</a>
+        }
     </div>
 
     @if (Model.Reviews.Count < 1)

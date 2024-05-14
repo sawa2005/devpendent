@@ -22,6 +22,7 @@ namespace Devpendent.Infrastructure.Components
                 var rating = reviews.Any() ? reviews.Average(r => r.Rating) : 0;
 
                 ViewBag.ReviewCount = reviews.Count();
+                ViewBag.Username = userName;
 
                 return View("Average", rating);
             }

@@ -1,163 +1,165 @@
-﻿<div class="rating-wrap mb-2">
+﻿<a asp-controller="Reviews" asp-action="Index" asp-route-userName="@ViewBag.Username">
+    <div class="rating-wrap mb-2">
+        @if (Model > 0 && Model <= 1)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
+                <defs>
+                    <clipPath>
+                        <rect width="89.523" height="13.875" fill="none" />
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#clip-path)">
+                    <g transform="translate(-312.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-294.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-276.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-258.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-240.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+            </svg>
+        }
+        else if (Model > 1 && Model <= 2)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
+                <defs>
+                    <clipPath>
+                        <rect width="89.523" height="13.875" fill="none" />
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#clip-path)">
+                    <g transform="translate(-312.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-294.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-276.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-258.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-240.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+            </svg>
+        }
+        else if (Model > 2 && Model <= 3)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
+                <defs>
+                    <clipPath>
+                        <rect width="89.523" height="13.875" fill="none" />
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#clip-path)">
+                    <g transform="translate(-312.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-294.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-276.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-258.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-240.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+            </svg>
+        }
+        else if (Model > 3 && Model <= 4)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
+                <defs>
+                    <clipPath>
+                        <rect width="89.523" height="13.875" fill="none" />
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#clip-path)">
+                    <g transform="translate(-312.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-294.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-276.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-258.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-240.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                </g>
+            </svg>
+        }
+        else if (Model > 4 && Model <= 5)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
+                <defs>
+                    <clipPath>
+                        <rect width="89.523" height="13.875" fill="none" />
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#clip-path)">
+                    <g transform="translate(-312.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-294.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-276.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-258.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                    <g transform="translate(-240.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
+                    </g>
+                </g>
+            </svg>
+        }
+        else
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
+                <defs>
+                    <clipPath>
+                        <rect width="89.523" height="13.875" fill="none" />
+                    </clipPath>
+                </defs>
+                <g clip-path="url(#clip-path)">
+                    <g transform="translate(-312.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-294.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-276.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-258.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                    <g transform="translate(-240.35 -2160.35)">
+                        <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
+                    </g>
+                </g>
+            </svg>
+        }
 
-    @if (Model > 0 && Model <= 1)
-    {
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
-            <defs>
-                <clipPath>
-                    <rect width="89.523" height="13.875" fill="none" />
-                </clipPath>
-            </defs>
-            <g clip-path="url(#clip-path)">
-                <g transform="translate(-312.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-294.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-276.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-258.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-240.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-            </g>
-        </svg>
-    }
-    else if (Model > 1 && Model <= 2)
-    {
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
-            <defs>
-                <clipPath>
-                    <rect width="89.523" height="13.875" fill="none" />
-                </clipPath>
-            </defs>
-            <g clip-path="url(#clip-path)">
-                <g transform="translate(-312.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-294.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-276.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-258.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-240.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-            </g>
-        </svg>
-    }
-    else if (Model > 2 && Model <= 3)
-    {
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
-            <defs>
-                <clipPath>
-                    <rect width="89.523" height="13.875" fill="none" />
-                </clipPath>
-            </defs>
-            <g clip-path="url(#clip-path)">
-                <g transform="translate(-312.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-294.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-276.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-258.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-240.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-        </svg>
-    }
-    else if (Model > 3 && Model <= 4)
-    {
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
-            <defs>
-                <clipPath>
-                    <rect width="89.523" height="13.875" fill="none" />
-                </clipPath>
-            </defs>
-            <g clip-path="url(#clip-path)">
-                <g transform="translate(-312.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-294.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-276.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-258.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-240.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-            </g>
-        </svg>
-    }
-    else if (Model > 4 && Model <= 5)
-    {
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
-            <defs>
-                <clipPath>
-                    <rect width="89.523" height="13.875" fill="none" />
-                </clipPath>
-            </defs>
-            <g clip-path="url(#clip-path)">
-                <g transform="translate(-312.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-294.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-276.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-258.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-                <g transform="translate(-240.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#fcba03" />
-                </g>
-            </g>
-        </svg>
-    } else
-    {
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.523" height="13.875" viewBox="0 0 89.523 13.875">
-            <defs>
-                <clipPath>
-                    <rect width="89.523" height="13.875" fill="none" />
-                </clipPath>
-            </defs>
-            <g clip-path="url(#clip-path)">
-                <g transform="translate(-312.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-294.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-276.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-258.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-                <g transform="translate(-240.35 -2160.35)">
-                    <path d="M9.611,3l2.043,4.139,4.568.668-3.306,3.22.78,4.549L9.611,13.426,5.526,15.575l.78-4.549L3,7.806l4.568-.668Z" transform="translate(310 2158)" fill="#adadad" />
-                </g>
-            </g>
-        </svg>
-    }
-
-    <h6 class="mb-0">@Math.Round(Model, 1) stars average</h6>
-</div>
+        <h6 class="mb-0">@Math.Round(Model, 1) stars average</h6>
+    </div>
+</a>

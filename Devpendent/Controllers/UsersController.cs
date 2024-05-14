@@ -49,6 +49,11 @@ namespace Devpendent.Controllers
                 return NotFound();
             }
 
+            if (User.Identity.Name == userName)
+            {
+                ViewBag.CreateReview = false;
+            }
+
             user.Image ??= "dp-default.png";
 
             if (user.Projects != null)

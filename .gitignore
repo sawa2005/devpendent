@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Devpendent/wwwroot/media/users
+/Devpendent/wwwroot/media/projects

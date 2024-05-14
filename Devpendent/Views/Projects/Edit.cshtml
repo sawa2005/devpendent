@@ -1,4 +1,5 @@
-﻿@model Devpendent.Models.Project
+﻿@using System.Globalization
+@model Devpendent.Models.Project
 
 @{
     ViewData["Title"] = "Edit " + Model.Title;
@@ -21,8 +22,8 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
-                <label asp-for="Budget" class="control-label"></label>
-                <input asp-for="Budget" class="form-control" />
+                <label asp-for="Budget" class="control-label">Budget (USD)</label>
+                <input asp-for="Budget" class="form-control" value="@Model.Budget.ToString("F2", CultureInfo.InvariantCulture)" />
                 <span asp-validation-for="Budget" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">

@@ -742,6 +742,10 @@ main {
 .form-floating {
     border: 1px solid #000;
     border-radius: 15px;
+
+    .form-control {
+        border: none;
+    }
 }
 
 .form-floating, .form {
@@ -795,7 +799,7 @@ main {
 
 .form-control {
     border-radius: 15px;
-    border: none;
+    border: 1px solid #000;
 }
 
 .form-control::file-selector-button {
