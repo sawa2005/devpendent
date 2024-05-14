@@ -284,7 +284,7 @@ namespace Devpendent.Areas.Identity.Pages.Account.Manage
                 string imageName = user.UserName + extension;
                 string filePath = Path.Combine(uploadsDir, imageName);
 
-                if (user.Image != null)
+                if (user.Image != null && user.Image != "dp-default.png")
                 {
                     string oldImagePath = Path.Combine(uploadsDir, user.Image);
 

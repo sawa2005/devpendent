@@ -10,12 +10,12 @@ namespace Devpendent.Data.Validation
             {
                 var extension = Path.GetExtension(file.FileName);
 
-                string[] extensions = { "jpg", "png" };
+                string[] extensions = { "jpg", "jpeg", "png" };
                 bool result = extensions.Any(x => extension.EndsWith(x));
 
                 if (!result)
                 {
-                    return new ValidationResult("Allowed extensions are jpg and png");
+                    return new ValidationResult("Allowed extensions are jpg/jpeg and png");
                 }
             }
 

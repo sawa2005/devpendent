@@ -133,6 +133,11 @@ namespace Devpendent.Areas.Identity.Pages.Account
                 ModelState.AddModelError("Input.Username", "This username is already in use.");
             }
 
+            if (_context.Users.Any(i => i.Email == Input.Email))
+            {
+                ModelState.AddModelError("Input.Email", "This email is already in use.");
+            }
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
