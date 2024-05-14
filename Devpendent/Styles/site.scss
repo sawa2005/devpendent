@@ -925,6 +925,23 @@ main {
     }
 }
 
+.message {
+    visibility: hidden;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 1rem;
+    position: fixed;
+    bottom: -100vh;
+    box-shadow: 0px 0px 50px rgba(0,0,0,0.5);
+    transition: bottom ease-in-out 0.5s;
+    margin-right: 40px;
+    cursor: pointer;
+
+    p {
+        font-size: 1rem;
+    }
+}
+
 @media (hover: hover) {
     .btn {
         transition: 0.2s ease;

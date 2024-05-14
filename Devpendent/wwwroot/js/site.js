@@ -152,13 +152,29 @@ function readURL(input) {
 const info = document.getElementById('info');
 const passwordForm = document.getElementById('Input_Password');
 
-passwordForm.addEventListener('focus', () => {
-    info.style.display = 'block';
-})
+if (passwordForm != null) {
+    passwordForm.addEventListener('focus', () => {
+        info.style.display = 'block';
+    })
 
-passwordForm.addEventListener('focusout', () => {
-    info.style.display = 'none';
-})
+    passwordForm.addEventListener('focusout', () => {
+        info.style.display = 'none';
+    })
+}
+
+const message = document.querySelector('.message');
+const profileForm = document.querySelector('#profile-form');
+
+if (profileForm != null) {
+    profileForm.addEventListener('input', () => {
+        message.style.visibility = 'visible';
+        message.style.bottom = '50px';
+    })
+
+    message.addEventListener('click', () => {
+        message.style.bottom = '-100vh';
+    })
+}
 
 const navbar = document.querySelector('.navbar-collapse');
 const text = document.querySelector('.home-text');
