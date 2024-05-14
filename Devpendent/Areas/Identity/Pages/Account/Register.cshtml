@@ -34,6 +34,9 @@
             <div class="form-floating mb-3">
                 <input asp-for="Input.Password" class="form-control" aria-required="true" placeholder="password" />
                 <label asp-for="Input.Password">Password</label>
+                <div id="info">
+                    <p>The password must be at least six characters long and include an uppercase and lowercase character, a digit, and a non-alphanumeric character.</p>
+                </div>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">

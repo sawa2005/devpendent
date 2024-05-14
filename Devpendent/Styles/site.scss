@@ -154,6 +154,7 @@ main {
     height: 100%;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(75px);
+    -webkit-backdrop-filter: blur(75px);
     pointer-events: none;
 }
 
@@ -621,6 +622,10 @@ main {
     display: flex;
     gap: 25px;
 
+    .form-floating {
+        border: none;
+    }
+
     #Input_FirstName, #Input_LastName, #Input_Location, #Input_Website {
         height: initial;
         border: none;
@@ -734,6 +739,11 @@ main {
     }
 }
 
+.form-floating {
+    border: 1px solid #000;
+    border-radius: 15px;
+}
+
 .form-floating, .form {
     transition: all 0.2s ease;
 }
@@ -779,9 +789,13 @@ main {
     }
 }
 
-.form-control {
+#Input_ImageUpload {
     border: 1px solid #000;
+}
+
+.form-control {
     border-radius: 15px;
+    border: none;
 }
 
 .form-control::file-selector-button {
@@ -900,6 +914,15 @@ main {
 
 .twofactor .btn {
     margin-bottom: 8px
+}
+
+#info {
+    display: none;
+    padding: 1rem;
+
+    p {
+        font-size: 1rem;
+    }
 }
 
 @media (hover: hover) {
