@@ -30,7 +30,8 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddDbContext<DevpendentContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:DbConnection"]);
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DbConnection"],
+    options => options.EnableRetryOnFailure());
 });
 
 builder.Services.AddDefaultIdentity<DevpendentUser>(options => options.SignIn.RequireConfirmedAccount = true)
